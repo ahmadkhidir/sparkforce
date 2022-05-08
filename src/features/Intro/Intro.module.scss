@@ -1,0 +1,43 @@
+.intro {
+    background-color: white;
+
+    > .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 30px;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+
+        > h1 {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        > p {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            max-width: 537px;
+            line-height: 1.5;
+        }
+
+        >.grid {
+            width: 100%;
+            margin-top: 50px;
+            display: grid;
+            grid-auto-flow: row;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+    }
+}
+
+@media (max-width: 414px) {
+    .intro > .container {
+        align-items: center;
+        text-align: center;
+    }
+}
