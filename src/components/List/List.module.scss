@@ -1,0 +1,42 @@
+.list_view {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.children {
+    flex: 1;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+.children::-webkit-scrollbar{
+    width: 8px;
+}
+.children::-webkit-scrollbar-thumb {
+    background-color: rgba(92, 164, 123, .7);
+    border-radius: 8px;
+}
+
+
+.list {
+    list-style-image: url(./assets/ico.svg);
+
+    > li {
+        margin-top: 32px;
+        margin-left: -20px;
+
+        > h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        > p {
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+}
