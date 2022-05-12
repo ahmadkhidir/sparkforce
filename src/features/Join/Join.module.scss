@@ -1,0 +1,23 @@
+.join {
+    background-color: #CFE0FC;
+
+    > .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 30px;
+
+        > h1 {
+            font-size: 36px;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        > .grid {
+            margin-top: 70px;
+            display: grid;
+            grid-auto-flow: row dense;
+            grid-template-columns: repeat(auto-fit, minmax(274px, 1fr));
+            gap: 24px;
+        }
+    }
+}

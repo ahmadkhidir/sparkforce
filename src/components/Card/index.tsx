@@ -1,5 +1,5 @@
 import styles from './Card.module.scss'
-import { ImageContentCardProps } from './utils'
+import { IconContentCardProps, ImageContentCardProps } from './utils'
 
 export function ImageContentCard(props: ImageContentCardProps) {
     return (
@@ -21,6 +21,16 @@ export function ImageContentRowCard(props: ImageContentCardProps) {
                 <h1>{props.title}</h1>
                 <p>{props.detail}</p>
             </div>
+        </div>
+    )
+}
+
+export function IconContentCard(props: IconContentCardProps) {
+    return (
+        <div className={styles.icon_content__card}>
+            <img src={props.icon} alt='icon' />
+            <h1>{props.title}</h1>
+            <p>{props.detail}</p>
         </div>
     )
 }
