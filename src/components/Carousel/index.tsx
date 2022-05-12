@@ -5,9 +5,14 @@ import Slider from 'react-slick'
 
 import arrowLeft from './assets/arrowLeft.svg'
 import arrowRight from './assets/arrowRight.svg'
+import { Video } from '../Video'
 
 interface CarouselProps {
     items: [image: string, title: string, details: string][]
+}
+
+interface VideoCarouselProps {
+    items: [video: string, title: string, details: string][]
 }
 
 export function Carousel(props: CarouselProps) {
@@ -17,11 +22,11 @@ export function Carousel(props: CarouselProps) {
 
 
     useEffect(() => {
-      if (items.length % 2 === 1) {
-        setItems(i=>i.concat(i))
-      }
+        if (items.length % 2 === 1) {
+            setItems(i => i.concat(i))
+        }
     }, [])
-    
+
     const handleNext = () => {
         carousel1!.slickNext()
     }
@@ -31,6 +36,7 @@ export function Carousel(props: CarouselProps) {
     return (
         <div className={styles.carousel}>
             <Slider ref={(r) => setCarousel1(r)}
+                arrows={false}
                 dots={false}
                 infinite={true}
                 speed={500}
@@ -61,5 +67,49 @@ export function Carousel(props: CarouselProps) {
                 <img src={arrowRight} onClick={handleNext} alt='go right' />
             </div>
         </div >
+    )
+}
+
+
+export function VideoCarousel(props: VideoCarouselProps) {
+    const [carousel, setCarousel] = useState<Slider | null>()
+
+    const handleNext = () => {
+        carousel!.slickNext()
+    }
+    const handlePrev = () => {
+        carousel!.slickPrev()
+    }
+    return (
+        <div className={styles.video_carousel}>
+            <Slider ref={(e) => setCarousel(e)}
+                arrows={false}
+                dots={false}
+                infinite={true}
+                speed={1000}
+                slidesToShow={1}
+                slidesToScroll={1}
+            >
+                {props.items.map((item, index) =>
+                    <div key={index} className={styles.item}>
+                        <div className={styles.container}>
+                            <div className={styles.content}>
+                                <p>{item[1]}</p>
+                                <h1>“{item[2]}”</h1>
+                            </div>
+                            {/* <div className={styles.video} style={{ backgroundColor: item[0] }}> */}
+                                <Video src={item[0]} className={styles.video} />
+                            {/* </div> */}
+                        </div>
+
+                    </div>
+                )}
+            </Slider>
+
+            <div className={styles.buttons}>
+                <img src={arrowLeft} onClick={handlePrev} alt='go left' />
+                <img src={arrowRight} onClick={handleNext} alt='go right' />
+            </div>
+        </div>
     )
 }

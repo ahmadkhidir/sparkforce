@@ -7,6 +7,7 @@ import { Join } from "../features/Join";
 import { LearningCentre } from "../features/LearningCentre";
 import { OurTeam } from "../features/OurTeam";
 import { Showcase } from "../features/Showcase";
+import { Testimonials } from "../features/Testimonials";
 
 export function Home(props:any) {
     return (
@@ -18,6 +19,7 @@ export function Home(props:any) {
                 <Showcase />
                 <Join />
                 <OurTeam />
+                <Testimonials />
                 <Footer />
             </ListView>
         </main>

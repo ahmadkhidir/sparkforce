@@ -5,6 +5,8 @@ import logo from './assets/logo.svg'
 import facebook from './assets/facebook.svg'
 import twitter from './assets/twitter.svg'
 import linkedin from './assets/linkedin.svg'
+import floatingButton from './assets/floatingButton.svg'
+import { scrollRef } from '../../app/helper'
 
 export function Footer(props: any) {
     return (
@@ -20,6 +22,9 @@ export function Footer(props: any) {
                     <img src={facebook} alt='facebook' />
                     <img src={linkedin} alt='linkedin' />
                 </div>
+            </div>
+            <div className={styles.navs}>
+                <img src={floatingButton} onClick={() => scrollRef.current!.scrollTo({top: 0, behavior: 'smooth'})} alt='scroll top' />
             </div>
             <div className={styles.foot}>
                 <div className={styles.container}>

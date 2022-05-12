@@ -1,4 +1,5 @@
 import { ReactElement } from "react"
+import { scrollRef } from "../../app/helper"
 import styles from "./List.module.scss"
 
 interface ListViewInterface {
@@ -10,7 +11,7 @@ export function ListView(props: ListViewInterface) {
     return (
         <section className={styles.list_view}>
             {props.appBar}
-            <div className={styles.children}>{props.children}</div>
+            <div ref={scrollRef} className={styles.children}>{props.children}</div>
         </section>
     )
 }

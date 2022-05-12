@@ -3,7 +3,8 @@
     font-weight: 600;
     height: 40px;
     padding: 5px 20px;
-    border: 0;
+    border: 2px solid transparent;
+    box-sizing: border-box;
     outline: 0;
     white-space: nowrap;
 }
@@ -15,7 +16,7 @@
     border-radius: 4px;
 
     &:focus {
-        outline: 2px solid #dbdee7;
+        border: 2px solid #dbdee7;
     }
 }
 
