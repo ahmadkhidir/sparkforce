@@ -151,6 +151,7 @@
     display: flex;
     flex-flow: column;
     height: 50px;
+    max-width: 100%;
     position: relative;
     padding: 10px;
 
@@ -162,7 +163,7 @@
         position: absolute;
         width: 15px;
         height: 15px;
-        top: 28px;
+        top: 26px;
         left: 37px;
     }
     > .input {
@@ -176,7 +177,6 @@
             display: flex;
             flex-flow: row-reverse nowrap;
             width: min-content;
-            position: relative;
             align-items: center;
             margin-top: 2px;
 
@@ -187,7 +187,7 @@
                 position: absolute;
                 opacity: 0;
                 left: 0;
-                top: 0;
+                top: 26px;
                 z-index: 10;
             }
 
@@ -201,11 +201,11 @@
         }
 
         > input {
+            box-sizing: border-box;
+            width: 100%;
             position: absolute;
-            left: 0;
-            right: 0;
             top: 0;
-            bottom: 0;
+            left: 0;
             z-index: 1;
             background-color: transparent;
             padding: 23px 5px 5px 60px;
@@ -228,3 +228,16 @@
         }
     }
 }
+
+
+// .phonefield {
+//     display: flex;
+//     flex-flow: column;
+//     max-width: 100%;
+
+//     > div  {
+//         display: flex;
+//         flex-flow: row nowrap;
+//         max-width: 100%;
+//     }
+// }
