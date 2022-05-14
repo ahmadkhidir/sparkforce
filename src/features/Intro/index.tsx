@@ -5,14 +5,16 @@ import Image1 from './assets/image1.png'
 import Image2 from './assets/image2.png'
 import Image3 from './assets/image3.png'
 import Image4 from './assets/image4.png'
+import { useNavigate } from 'react-router-dom'
 
 export function Intro(props: any) {
+    const navigate = useNavigate()
     return (
         <section className={styles.intro}>
             <div className={styles.container}>
                 <h1>Spark Force</h1>
                 <p>Create online presence, showcase your portfolio, access opportunities and learning materials for career optimization.</p>
-                <ArrowButton text='Join Waitlist' />
+                <ArrowButton text='Join Waitlist' onClick={() => navigate('/waitlist')} />
 
                 <div className={styles.grid}>
                     <ImageContentCard

@@ -1,4 +1,4 @@
-export type OnClickType = Function | string | undefined
+export type OnClickType = React.MouseEventHandler<HTMLButtonElement> | undefined
 
 export interface ButtonProps {
     text: string,

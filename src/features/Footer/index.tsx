@@ -7,13 +7,15 @@ import twitter from './assets/twitter.svg'
 import linkedin from './assets/linkedin.svg'
 import floatingButton from './assets/floatingButton.svg'
 import { scrollRef } from '../../app/helper'
+import { useNavigate } from 'react-router-dom'
 
 export function Footer(props: any) {
+    const navigate = useNavigate()
     return (
         <footer className={styles.footer}>
             <div className={styles.head}>
                 <h1>Get unlimited opportunities to boost your career</h1>
-                <Button text='Join Waitlist' />
+                <Button text='Join Waitlist' onClick={() => navigate('/waitlist')} />
                 <hr />
                 <img src={logo} alt='logo' />
                 <p>Explore the world of unlimited opportunities to boost your career</p>

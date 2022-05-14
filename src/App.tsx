@@ -3,11 +3,13 @@ import { Home } from "./pages/Home";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { WaitList } from "./pages/WaitList";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/waitlist" element={<WaitList />} />
     </Routes>
   )
 }

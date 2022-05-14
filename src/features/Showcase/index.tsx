@@ -2,14 +2,16 @@ import { ArrowButton } from '../../components/Button'
 import styles from './Showcase.module.scss'
 import image1 from './assets/image1.png'
 import { List } from '../../components/List'
+import { useNavigate } from 'react-router-dom'
 
 export function Showcase(props: any) {
+    const navigate = useNavigate()
     return (
         <section className={styles.showcase}>
             <div className={styles.container}>
                 <div className={styles.content}>
                     <h1>Showcase Your Skills to Access Opportunities</h1>
-                    <ArrowButton text='Join Waitlist' />
+                    <ArrowButton text='Join Waitlist' onClick={() => navigate('/waitlist')} />
                     <List
                         items={[
                             [

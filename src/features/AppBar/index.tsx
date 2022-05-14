@@ -14,7 +14,7 @@ export function AppBar(props:any) {
                     <TextButton text='Our Team' />
                     <TextButton text='Testimonials' />
                     <div style={{width: 30}}></div>
-                    <Button text='Join Waitlist' onClick={'Coming soon!'} />
+                    <Button text='Join Waitlist' onClick={() => navigate('/waitlist')} />
                 </div>
                 <button className={styles.mobile_nav_menu}></button>
             </div>
