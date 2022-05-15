@@ -12,7 +12,7 @@ export function WaitList(props: any) {
     const [fullname, setFullname] = useState('')
     const [country, setCountry] = useState('')
     const [phone, setPhone] = useState<Value>()
-    const [location, setLocation] = useState<string | undefined>(undefined)
+    const [location, setLocation] = useState<string | undefined>('')
     const [email, setEmail] = useState('')
     const [FOI, setFOI] = useState('')
 
@@ -31,11 +31,11 @@ export function WaitList(props: any) {
 
         if (res === (200|201)) alert("You have successfully applied for our waitlist!")
 
-        setFullname('');
-        setCountry('');
-        setLocation(undefined)
-        setEmail('')
-        setFOI('')
+        // setFullname('');
+        // setCountry('');
+        // setLocation(undefined)
+        // setEmail('')
+        // setFOI('')
     }
     return (
         <ListView appBar={<AppBar />}>
