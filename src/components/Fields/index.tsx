@@ -9,7 +9,7 @@ interface InputProps {
     label: string,
     required: boolean,
     placeholder?: string,
-    value: string | number | readonly string[] | undefined,
+    value: string | undefined,
     onChange?: ChangeEventHandler<HTMLInputElement> | undefined
 }
 
@@ -17,7 +17,7 @@ interface PhoneInputProps {
     label: string,
     required: boolean,
     placeholder?: string,
-    value: Value
+    value: Value | undefined
     onChange: (value?: Value) => void
 }
 
