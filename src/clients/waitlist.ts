@@ -3,7 +3,8 @@ import { Value } from 'react-phone-number-input'
 
 axios.defaults.headers.common['Authorization'] = `Token ${process.env.REACT_APP_AUTH_TOKEN!}`
 
-const endpoint = "http://127.0.0.1:8000/v1/waitlist-subscribers/"
+const local_endpoint = "http://127.0.0.1:8000/v1/waitlist-subscribers/"
+const endpoint = "https://sparkforce-backend.herokuapp.com/v1/waitlist-subscribers/"
 
 
 interface WaitlistSubscriberProps {
