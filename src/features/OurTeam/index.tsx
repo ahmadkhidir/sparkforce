@@ -8,30 +8,20 @@ export function OurTeam(props: any) {
             <Carousel
                 items={[
                     [
-                        require('./assets/image1.png'),
+                        require('./assets/image1.jpg'),
                         'Dr. Lawal Bakare',
-                        'CEO / Creative Director'
+                        'Founder, Service Design Lead'
                     ],
                     [
-                        require('./assets/image2.png'),
-                        'Dr. Ahmad Khidir',
-                        'Junior Developer'
+                        require('./assets/image2.jpg'),
+                        'Gbubemi Atimomo',
+                        'HR Lead'
                     ],
                     [
-                        require('./assets/image3.png'),
-                        'Maryam Khidir',
-                        'Senior Developer'
-                    ],
-                    [
-                        require('./assets/image1.png'),
-                        'Mr Olawale',
-                        'UI / UX Designer'
-                    ],
-                    [
-                        require('./assets/image2.png'),
-                        'Princewill Uzo',
-                        'Backend Developer'
-                    ],
+                        require('./assets/image3.jpg'),
+                        'Folake Lawal',
+                        'Training Systems Lead'
+                    ]
                 ]}
             />
         </section>
