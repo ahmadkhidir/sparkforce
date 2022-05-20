@@ -28,14 +28,15 @@ export function WaitList(props: any) {
             phone: phone,
             field_of_interest: FOI
         })
-
+        // alert success message if successful request
         if (res === (200|201)) alert("You have successfully applied for our waitlist!")
 
-        // setFullname('');
-        // setCountry('');
-        // setLocation(undefined)
-        // setEmail('')
-        // setFOI('')
+        // clear fields
+        setFullname('');
+        setCountry('');
+        setLocation(undefined)
+        setEmail('')
+        setFOI('')
     }
     return (
         <ListView appBar={<AppBar />}>
