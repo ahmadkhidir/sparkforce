@@ -5,6 +5,8 @@ import Image1 from './assets/image1.png'
 import Image2 from './assets/image2.png'
 import Image3 from './assets/image3.png'
 import Image4 from './assets/image4.png'
+import Image5 from './assets/image5.png'
+import Image6 from './assets/image6.png'
 
 export function LearningCentre(props: any) {
     return (
@@ -36,12 +38,12 @@ export function LearningCentre(props: any) {
                         detail='Develop your skills in therapy'
                     />
                     <ImageContentRowCard
-                        image={Image1}
+                        image={Image5}
                         title='Pharmacy Technician'
                         detail='Develop your skills in pharmacy technician'
                     />
                     <ImageContentRowCard
-                        image={Image2}
+                        image={Image6}
                         title='Diagnostic Sonographer'
                         detail='Develop your skills in product management'
                     />
