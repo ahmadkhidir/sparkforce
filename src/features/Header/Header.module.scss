@@ -23,6 +23,12 @@
 }
 
 
+@media (max-width: 500px) {
+    .header > .video {
+        height: 450px;
+    }
+}
+
 @media (max-width: 414px) {
     .header > .caption > .container {
         flex-flow: column;
