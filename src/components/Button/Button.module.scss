@@ -61,4 +61,8 @@
         margin-left: 10px;
         fill: white;
     }
+
+    &:disabled {
+        background-color: #999999;
+    }
 }

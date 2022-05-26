@@ -1,9 +1,11 @@
+import { Dialog } from '@material-ui/core'
 import { useState } from 'react'
 import { Value } from 'react-phone-number-input'
 import { create_waitlist_subscriber } from '../../clients/waitlist'
 import { SubmitButton } from '../../components/Button'
 import { InputField, PhoneField, SelectField } from '../../components/Fields'
 import { ListView } from '../../components/List'
+import { SuccessModal, ErrorModal, ConflictModal } from '../../components/Modal'
 import { AppBar } from '../../features/AppBar'
 import { Footer } from '../../features/Footer'
 import styles from './WaitList.module.scss'
@@ -16,11 +18,17 @@ export function WaitList(props: any) {
     const [email, setEmail] = useState('')
     const [FOI, setFOI] = useState('')
 
+    const [openModal, setOpenModal] = useState(false)
+    const [responseStatus, setResponseStatus] = useState<number | undefined>()
 
-    const  handleSubmit = async (e: any) => {
+    const [inProccess, setInProccess] = useState(false)
+
+
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
+        setInProccess(true)
 
-         const res = await create_waitlist_subscriber({
+        const res = await create_waitlist_subscriber({
             country: country,
             email: email,
             fullname: fullname,
@@ -28,18 +36,48 @@ export function WaitList(props: any) {
             phone: phone,
             field_of_interest: FOI
         })
-        // alert success message if successful request
-        if (res === (200|201)) alert("You have successfully applied for our waitlist!")
 
+        // alert success message if successful request
+        setOpenModal(true)
+        setResponseStatus(res.status)
         // clear fields
-        setFullname('');
-        setCountry('');
-        setLocation(undefined)
-        setEmail('')
-        setFOI('')
+        // setFullname('');
+        // setCountry('');
+        // setLocation(undefined)
+        // setEmail('')
+        // setFOI('')
+        setInProccess(false)
     }
+
+    const handleDialog = () => {
+        switch (responseStatus) {
+            case 201:
+                return <SuccessModal 
+                title= "Thank You!"
+                body= "You have successfully joined our waitlist"
+                onClick={() => setOpenModal(false)} 
+                />
+            case 409:
+                return <ConflictModal
+                title= "Sorry!"
+                body= "A user with this email is already added to our waitlist"
+                onClick={() => setOpenModal(false)} 
+                />
+            default:
+                return <ErrorModal 
+                title= "Error!"
+                body= {`Error while proccessing your request(E${responseStatus})`}
+                onClick={() => setOpenModal(false)} 
+                />
+        }
+    }
+
+
     return (
         <ListView appBar={<AppBar />}>
+            <Dialog open={openModal} onClose={() => setOpenModal(false)} fullWidth maxWidth={'xs'}>
+                {handleDialog()}
+            </Dialog>
             <main className={styles.wait_list}>
                 <h1>Join Waitlist</h1>
                 <form onSubmit={handleSubmit}>
@@ -85,7 +123,7 @@ export function WaitList(props: any) {
                     <p>By proceeding you agree to our</p>
                     <p>Privacy Policy</p>
 
-                    <SubmitButton className={styles.submit_button} />
+                    <SubmitButton className={styles.submit_button} loading={inProccess} />
                 </form>
             </main>
             <Footer />

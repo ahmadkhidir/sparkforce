@@ -1,9 +1,9 @@
-import axios from "axios"
+import axios, { AxiosError, AxiosResponse } from "axios"
 import { Value } from 'react-phone-number-input'
 
 axios.defaults.headers.common['Authorization'] = `Token ${process.env.REACT_APP_AUTH_TOKEN!}`
 
-const local_endpoint = "http://127.0.0.1:8000/v1/waitlist-subscribers/"
+// const endpoint = "http://127.0.0.1:8000/v1/waitlist-subscribers/"
 const endpoint = "https://sparkforce-backend.herokuapp.com/v1/waitlist-subscribers/"
 
 
@@ -20,12 +20,22 @@ interface WaitlistSubscriberProps {
 
 
 async function create_waitlist_subscriber(props: WaitlistSubscriberProps) {
-    const response = await axios.post(
+    try {
+       const response = await axios.post(
         endpoint,
         { ...props },
-    )
+    ) 
+    return {
+        status: response.status
+    };
+    } catch (error: any) {
+        return {
+            
+            status: error.request.status
+        }
+    }
 
-    return response.status
+    
 }
 
 
