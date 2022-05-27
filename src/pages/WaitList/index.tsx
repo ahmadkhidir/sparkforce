@@ -59,14 +59,14 @@ export function WaitList(props: any) {
                 />
             case 409:
                 return <ConflictModal
-                title= "Sorry!"
-                body= "A user with this email is already added to our waitlist"
+                title= "Hey!"
+                body= "Oops! user already exist in our waitlist database"
                 onClick={() => setOpenModal(false)} 
                 />
             default:
                 return <ErrorModal 
                 title= "Error!"
-                body= {`Error while proccessing your request(E${responseStatus})`}
+                body= {`Oh! sorry, kindly try again later(E${responseStatus})`}
                 onClick={() => setOpenModal(false)} 
                 />
         }

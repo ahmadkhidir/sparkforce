@@ -1,6 +1,7 @@
 import styles from './Modal.module.scss'
 import Close from './assets/close.svg';
 import Success from './assets/success.svg';
+import Error from './assets/error.svg';
 import Logo from './assets/logo.svg';
 
 
@@ -34,7 +35,7 @@ export function ErrorModal(props: ModalProps) {
                 alt='close button'
                 onClick={props.onClick}
             />
-            <img src={Success} className={styles.icon} alt='error icon' />
+            <img src={Error} className={styles.icon} alt='error icon' />
             <h1>{props.title}</h1>
             <p>{props.body}</p>
             <img src={Logo} className={styles.logo} alt='logo' />
@@ -50,7 +51,7 @@ export function ConflictModal(props: ModalProps) {
                 alt='close button'
                 onClick={props.onClick}
             />
-            <img src={Success} className={styles.icon} alt='conflict icon' />
+            <img src={Error} className={styles.icon} alt='conflict icon' />
             <h1>{props.title}</h1>
             <p>{props.body}</p>
             <img src={Logo} className={styles.logo} alt='logo' />
