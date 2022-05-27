@@ -86,7 +86,7 @@ export function CheckboxField(props: CheckboxProps) {
 export function PhoneField(props: PhoneInputProps) {
     return (
         <div className={styles.phonefield}>
-            <label htmlFor="">{props.label}</label>
+            <label htmlFor="">{props.label} [International format]</label>
             <ArrowDropDown className={styles.arrow}/>
             <PhoneInput
                 value={props.value}
