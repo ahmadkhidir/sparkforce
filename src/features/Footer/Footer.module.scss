@@ -38,8 +38,18 @@
 
         > .socials {
             margin-top: 35px;
-            > img {
+            > a {
+                display: inline-flex;
+                flex-flow: row nowrap;
+                align-items: flex-end;
                 margin: 0 15px;
+                font-size: 16px;
+                font-weight: 600;
+                color: black;
+                text-decoration: underline;
+                > img {
+                    margin-right: 3px;
+                }
             }
         }
     }

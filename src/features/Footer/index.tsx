@@ -20,9 +20,9 @@ export function Footer(props: any) {
                 <img src={logo} alt='logo' />
                 <p>Explore the world of unlimited opportunities to boost your career</p>
                 <div className={styles.socials}>
-                    <img src={twitter} alt='twitter' />
-                    <img src={facebook} alt='facebook' />
-                    <img src={linkedin} alt='linkedin' />
+                    {/* <img src={twitter} alt='twitter' /> */}
+                    {/* <img src={facebook} alt='facebook' /> */}
+                    <a href='https://www.linkedin.com/company/joinsparkforce/' target="_blank" rel='noreferrer'><img src={linkedin} alt='linkedin' />LinkedIn</a>
                 </div>
             </div>
             <div className={styles.navs}>
