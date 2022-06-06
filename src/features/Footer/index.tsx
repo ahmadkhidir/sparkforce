@@ -19,7 +19,7 @@ export function Footer(props: any) {
                 <hr />
                 <img src={logo} alt='logo' />
                 <p>Explore the world of unlimited opportunities to boost your career</p>
-                <div className={styles.socials}>
+                <div aria-label='social links' className={styles.socials}>
                     {/* <img src={twitter} alt='twitter' /> */}
                     {/* <img src={facebook} alt='facebook' /> */}
                     <a href='https://www.linkedin.com/company/joinsparkforce/' target="_blank" rel='noreferrer'><img src={linkedin} alt='linkedin' />LinkedIn</a>
