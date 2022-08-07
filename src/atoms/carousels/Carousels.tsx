@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 
 import arrowLeft from './assets/arrowLeft.svg'
 import arrowRight from './assets/arrowRight.svg'
-import { Video } from '../videos/Videos'
+import { VideoPlayer } from '../videos/Videos'
 
 interface CarouselProps {
     items: [image: string, title: string, details: string][]
@@ -98,7 +98,7 @@ export function VideoCarousel(props: VideoCarouselProps) {
                                 <h1>“{item[2]}”</h1>
                             </div>
                             {/* <div className={styles.video} style={{ backgroundColor: item[0] }}> */}
-                                <Video src={item[0]} className={styles.video} />
+                                <VideoPlayer src={item[0]} className={styles.video} />
                             {/* </div> */}
                         </div>
 

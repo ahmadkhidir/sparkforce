@@ -1,7 +1,7 @@
 import { createRef, useEffect, useState } from 'react'
 import styles from './Videos.module.scss'
 
-export function Video(props: {src: string, className?: string, autoplay?: boolean}) {
+export function VideoPlayer(props: {src: string, className?: string, autoplay?: boolean}) {
     const [isPlay, setIsPlay] = useState(props.autoplay!= null ? props.autoplay : false)
     const [isMute, setIsMute] = useState(true)
     const [isShow, setIsShow] = useState(true)

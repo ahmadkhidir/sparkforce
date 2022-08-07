@@ -1,7 +1,7 @@
 import { createRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../atoms/buttons/Buttons'
-import { Video } from '../../atoms/videos/Videos'
+import { VideoPlayer } from '../../atoms/videos/Videos'
 import styles from './Header.module.scss'
 
 const intro = require('./assets/Intro.mp4')
@@ -10,7 +10,7 @@ export default function Header(props: any) {
     const navigate = useNavigate()
     return (
         <header className={styles.header}>
-            <Video src={intro} className={styles.video} autoplay={true} />
+            <VideoPlayer src={intro} className={styles.video} autoplay={true} />
             <section className={styles.caption}>
                 <div className={styles.container}>
                     <p>Explore the world of unlimited opportunities to boost your career</p>
