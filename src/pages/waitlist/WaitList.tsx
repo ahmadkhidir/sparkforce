@@ -6,8 +6,8 @@ import { SubmitButton } from '../../atoms/Button'
 import { InputField, PhoneField, SelectField } from '../../atoms/Fields'
 import { ListView } from '../../atoms/List'
 import { SuccessModal, ErrorModal, ConflictModal } from '../../atoms/Modal'
-import AppBar from '../../features/app_bar/AppBar'
-import Footer from '../../features/footer/Footer'
+import AppBar from '../../components/app_bar/AppBar'
+import Footer from '../../components/footer/Footer'
 import styles from './WaitList.module.scss'
 
 export default function WaitList(props: any) {

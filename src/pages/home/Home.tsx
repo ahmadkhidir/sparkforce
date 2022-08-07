@@ -1,15 +1,15 @@
 import { ListView } from "../../atoms/List";
-import AppBar from "../../features/app_bar/AppBar";
-import Footer from "../../features/footer/Footer";
-import Header from "../../features/header/Header";
-import Intro from "../../features/intro/Intro";
-import Join from "../../features/join/Join";
-import LearningCentre from "../../features/learning_centre/LearningCentre";
-import OurTeam from "../../features/our_team/OurTeam";
-import Showcase from "../../features/showcase/Showcase";
-import Testimonials from "../../features/testimonials/Testimonials";
+import AppBar from "../../components/app_bar/AppBar";
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Intro from "../../components/intro/Intro";
+import Join from "../../components/join/Join";
+import LearningCentre from "../../components/learning_centre/LearningCentre";
+import OurTeam from "../../components/our_team/OurTeam";
+import Showcase from "../../components/showcase/Showcase";
+import Testimonials from "../../components/testimonials/Testimonials";
 
-export function Home(props:any) {
+export default function Home(props:any) {
     return (
         <ListView appBar={<AppBar />}>
             <Header />
