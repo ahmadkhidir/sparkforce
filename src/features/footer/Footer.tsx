@@ -6,7 +6,7 @@ import facebook from './assets/facebook.svg'
 import twitter from './assets/twitter.svg'
 import linkedin from './assets/linkedin.svg'
 import floatingButton from './assets/floatingButton.svg'
-import { scrollRef } from '../../app/helper'
+import { scrollRef } from '../../global/helper'
 import { useNavigate } from 'react-router-dom'
 
 export default function Footer(props: any) {

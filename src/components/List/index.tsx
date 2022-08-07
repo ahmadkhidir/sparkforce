@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { scrollRef } from "../../app/helper"
+import { scrollRef } from "../../global/helper"
 import styles from "./List.module.scss"
 
 interface ListViewInterface {
