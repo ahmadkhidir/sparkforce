@@ -1,5 +1,5 @@
-import { ArrowButton } from '../../components/Button'
-import { ImageContentRowCard } from '../../components/Card'
+import { ArrowButton } from '../../atoms/Button'
+import { ImageContentRowCard } from '../../atoms/Card'
 import styles from './LearningCentre.module.scss'
 import Image1 from './assets/image1.png'
 import Image2 from './assets/image2.png'

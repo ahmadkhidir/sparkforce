@@ -1,5 +1,5 @@
-import { ArrowButton } from '../../components/Button'
-import { ImageContentCard } from '../../components/Card'
+import { ArrowButton } from '../../atoms/Button'
+import { ImageContentCard } from '../../atoms/Card'
 import styles from './Intro.module.scss'
 import Image1 from './assets/image1.png'
 import Image2 from './assets/image2.png'

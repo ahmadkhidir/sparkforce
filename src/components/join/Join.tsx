@@ -1,4 +1,4 @@
-import { IconContentCard } from '../../components/Card'
+import { IconContentCard } from '../../atoms/Card'
 import styles from './Join.module.scss'
 
 import image1 from "./assets/image1.svg"

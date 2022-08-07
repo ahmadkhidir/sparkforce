@@ -1,4 +1,4 @@
-import { ListView } from "../../components/List";
+import { ListView } from "../../atoms/List";
 import AppBar from "../../features/app_bar/AppBar";
 import Footer from "../../features/footer/Footer";
 import Header from "../../features/header/Header";

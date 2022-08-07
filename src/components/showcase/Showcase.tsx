@@ -1,7 +1,7 @@
-import { ArrowButton } from '../../components/Button'
+import { ArrowButton } from '../../atoms/Button'
 import styles from './Showcase.module.scss'
 import image1 from './assets/image1.png'
-import { List } from '../../components/List'
+import { List } from '../../atoms/List'
 import { useNavigate } from 'react-router-dom'
 
 export default function Showcase(props: any) {
