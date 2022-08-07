@@ -1,0 +1,44 @@
+.showcase {
+    background-color: #E7F2EB;
+
+    > .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 30px;
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 62px 100px;
+
+        > .content {
+            order: 1;
+            > h1 {
+                font-size: 36px;
+                font-weight: 900;
+                line-height: 1.5;
+                margin-bottom: 28px;
+            }
+            
+        }
+
+        > .image {
+            order: 2;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .showcase > .container {
+        > .content {
+            order: 2;
+        }
+
+        > .image {
+            order: 1;
+        }
+    }
+}
