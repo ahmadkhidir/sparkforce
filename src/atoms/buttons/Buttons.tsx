@@ -1,4 +1,4 @@
-import styles from './Button.module.scss'
+import styles from './Buttons.module.scss'
 import { ButtonProps } from './utils'
 
 export function Button(props: ButtonProps) {

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Button, TextButton } from '../../atoms/Button'
+import { Button, TextButton } from '../../atoms/buttons/Buttons'
 import styles from './AppBar.module.scss'
 import Logo from './assets/logo.svg'
 

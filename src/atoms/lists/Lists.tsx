@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 import { scrollRef } from "../../global/helper"
-import styles from "./List.module.scss"
+import styles from "./Lists.module.scss"
 
 interface ListViewInterface {
     appBar: ReactElement,

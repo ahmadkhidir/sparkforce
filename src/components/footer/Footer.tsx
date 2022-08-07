@@ -1,4 +1,4 @@
-import { Button } from '../../atoms/Button'
+import { Button } from '../../atoms/buttons/Buttons'
 import styles from './Footer.module.scss'
 
 import logo from './assets/logo.svg'

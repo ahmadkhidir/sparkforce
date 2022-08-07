@@ -1,11 +1,11 @@
 import { createRef, LegacyRef, MouseEvent, MouseEventHandler, useEffect, useState } from 'react'
-import styles from './Carousel.module.scss'
+import styles from './Carousels.module.scss'
 
 import Slider from 'react-slick'
 
 import arrowLeft from './assets/arrowLeft.svg'
 import arrowRight from './assets/arrowRight.svg'
-import { Video } from '../Video'
+import { Video } from '../videos/Videos'
 
 interface CarouselProps {
     items: [image: string, title: string, details: string][]

@@ -1,4 +1,4 @@
-import styles from './Modal.module.scss'
+import styles from './Modals.module.scss'
 import Close from './assets/close.svg';
 import Success from './assets/success.svg';
 import Error from './assets/error.svg';

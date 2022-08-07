@@ -1,4 +1,4 @@
-import styles from './Card.module.scss'
+import styles from './Cards.module.scss'
 import { IconContentCardProps, ImageContentCardProps } from './utils'
 
 export function ImageContentCard(props: ImageContentCardProps) {

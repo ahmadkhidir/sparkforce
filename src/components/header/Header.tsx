@@ -1,7 +1,7 @@
 import { createRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../../atoms/Button'
-import { Video } from '../../atoms/Video'
+import { Button } from '../../atoms/buttons/Buttons'
+import { Video } from '../../atoms/videos/Videos'
 import styles from './Header.module.scss'
 
 const intro = require('./assets/Intro.mp4')

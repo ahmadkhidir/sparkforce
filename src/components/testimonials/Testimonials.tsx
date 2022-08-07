@@ -1,4 +1,4 @@
-import { VideoCarousel } from '../../atoms/Carousel'
+import { VideoCarousel } from '../../atoms/carousels/Carousels'
 import styles from './Testimonials.module.scss'
 const intro = require("./assets/Intro.mp4")
 

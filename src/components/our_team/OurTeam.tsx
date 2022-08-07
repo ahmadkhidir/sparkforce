@@ -1,4 +1,4 @@
-import { Carousel } from '../../atoms/Carousel'
+import { Carousel } from '../../atoms/carousels/Carousels'
 import styles from './OurTeam.module.scss'
 
 export default function OurTeam(props: any) {
