@@ -15,6 +15,7 @@
     "@types/react-dom": "^18.0.2",
     "@types/react-slick": "^0.23.8",
     "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-phone-number-input": "^3.1.52",

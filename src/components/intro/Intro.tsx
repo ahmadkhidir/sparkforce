@@ -14,7 +14,7 @@ export default function Intro(props: any) {
             <div className={styles.container}>
                 <h1>Spark Force</h1>
                 <p>Create online presence, showcase your portfolio, access opportunities and learning materials for career optimization.</p>
-                <ArrowButton text='Join Waitlist' onClick={() => navigate('/waitlist')} />
+                <ArrowButton text='Join Sparkforce' onClick={() => navigate('/waitlist')} />
 
                 <div className={styles.grid}>
                     <ImageContentCard

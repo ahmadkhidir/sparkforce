@@ -1,6 +1,3 @@
-export type OnClickType = React.MouseEventHandler<HTMLButtonElement> | undefined
-
-export interface ButtonProps {
+export interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     text: string,
-    onClick?: OnClickType
 }

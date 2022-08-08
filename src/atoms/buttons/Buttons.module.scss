@@ -15,7 +15,7 @@
     background-color: #000000;
     border-radius: 4px;
 
-    &:focus {
+    &:hover {
         border: 2px solid #dbdee7;
     }
 }
@@ -25,10 +25,10 @@
     background-color: transparent;
     color: #000000;
     padding: 5px 10px;
-    // width: 100px;
+    opacity: 0.8;
 
-    &:focus {
-        font-weight: 700;
+    &:hover {
+        opacity: 1;
     }
 }
 
@@ -43,7 +43,7 @@
         margin-left: 18px;
     }
 
-    &:focus {
+    &:hover {
         background-color: #dbdee7;
     }
 }

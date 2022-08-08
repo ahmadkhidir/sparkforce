@@ -11,7 +11,7 @@ export default function Showcase(props: any) {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <h1>Showcase Your Skills to Access Opportunities</h1>
-                    <ArrowButton text='Join Waitlist' onClick={() => navigate('/waitlist')} />
+                    <ArrowButton text='Join Sparkforce' onClick={() => navigate('/waitlist')} />
                     <List
                         items={[
                             [

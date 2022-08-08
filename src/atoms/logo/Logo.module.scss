@@ -1,0 +1,16 @@
+.logo {
+    height: 18px;
+}
+.logo_small {
+    height: 18px;
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .logo {
+        display: none;
+    }
+    .logo_small {
+        display: block;
+    }
+}
