@@ -9,7 +9,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/waitlist" element={<WaitList />} />
+      {/* <Route path="/waitlist" element={<WaitList />} /> */}
     </Routes>
   )
 }

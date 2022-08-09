@@ -1,4 +1,3 @@
-import { ArrowDownward, ArrowDropDown } from "@material-ui/icons"
 import { ChangeEventHandler, createRef, useState } from "react"
 import PhoneInput, { Value } from 'react-phone-number-input'
 import arrowDown from "./assets/arrow_down.svg"
@@ -87,7 +86,7 @@ export function PhoneField(props: PhoneInputProps) {
     return (
         <div className={styles.phonefield}>
             <label htmlFor="">{props.label} [International format]</label>
-            <ArrowDropDown className={styles.arrow}/>
+            {/* <ArrowDropDown className={styles.arrow}/> */}
             <PhoneInput
                 value={props.value}
                 onChange={props.onChange}

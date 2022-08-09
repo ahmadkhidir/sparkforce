@@ -1,4 +1,4 @@
-import { Dialog } from '@material-ui/core'
+// import { Dialog } from '@material-ui/core'
 import { useState } from 'react'
 import { Value } from 'react-phone-number-input'
 import { create_waitlist_subscriber } from '../../clients/waitlist'
@@ -75,9 +75,9 @@ export default function WaitList(props: any) {
 
     return (
         <ListView appBar={<AppBar />}>
-            <Dialog open={openModal} onClose={() => setOpenModal(false)} fullWidth maxWidth={'xs'}>
+            {/* <Dialog open={openModal} onClose={() => setOpenModal(false)} fullWidth maxWidth={'xs'}>
                 {handleDialog()}
-            </Dialog>
+            </Dialog> */}
             <main className={styles.wait_list}>
                 <h1>Join Waitlist</h1>
                 <form onSubmit={handleSubmit}>
