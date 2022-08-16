@@ -29,3 +29,12 @@ export function SelectField(props:{error?: any, placeholder?: string, className?
         </div>
     )
 }
+
+export function CheckBoxField(props:{label:string,checked: boolean, onChange?: (e:any)=>any}) {
+    return (
+        <div className={styles.checkbox}>
+            <input id='checkbox' type={'checkbox'} checked={props.checked} onChange={props.onChange} />
+            <label htmlFor='checkbox'>{props.label}</label>
+        </div>
+    )
+}

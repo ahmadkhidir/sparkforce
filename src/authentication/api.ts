@@ -16,6 +16,10 @@ export async function login(email: string, password: string, otp: string | numbe
     })
 }
 
+export async function register(data: any) {
+    return await client.POST('register/', undefined, data)
+}
+
 export async function checkUserValidity(token: string) {
     return await client.POST('check_user_validity/', undefined, {
         token: token

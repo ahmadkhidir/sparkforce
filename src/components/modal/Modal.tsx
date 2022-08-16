@@ -5,9 +5,10 @@ import { closeModal, openModal } from './modalSlice'
 import close_ic from './assets/close_ic.svg'
 import logo from './assets/logo.svg'
 import { Button, SubmitButton, TextButton } from '../../atoms/buttons/Buttons'
-import { InputField, SelectField } from '../../atoms/fields/Fields'
+import { CheckBoxField, InputField, SelectField } from '../../atoms/fields/Fields'
 import { Fragment, useEffect, useState } from 'react'
 import { getOTPAsync, loginAsync } from '../../authentication/slice'
+import { register } from '../../authentication/api'
 
 export default function ModalRoute() {
     const selectCurrent = useAppSelector(state => state.modal.current)
@@ -106,10 +107,12 @@ export function VerifyModal(props: any) {
 
 
 interface FormProps {
-    email: string | undefined,
-    password: string | undefined,
-    first_name: string | undefined,
-    last_name: string | undefined,
+    user: {
+        email: string | undefined,
+        password: string | undefined,
+        first_name: string | undefined,
+        last_name: string | undefined,
+    },
     phone: string | undefined,
     gender: string | undefined,
     age: string | undefined,
@@ -121,10 +124,12 @@ interface FormProps {
 }
 
 const initialForm: FormProps = {
-    email: undefined,
-    password: undefined,
-    first_name: undefined,
-    last_name: undefined,
+    user: {
+        email: undefined,
+        password: undefined,
+        first_name: undefined,
+        last_name: undefined,
+    },
     phone: undefined,
     gender: undefined,
     age: undefined,
@@ -139,8 +144,17 @@ export function RegisterModal(props: any) {
     const dispatch = useAppDispatch()
     const [index, setIndex] = useState(0)
     const [form, setForm] = useState<FormProps>(initialForm)
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
+    const submitForm = async (e: any) => {
+        try {
+            console.log(form)
+            const res = await register(form)
+            alert('success')
+            return true
+        } catch (error) {
+            console.log(error)
+            alert('error')
+            return false
+        }
     }
     const steps = [
         {
@@ -153,7 +167,7 @@ export function RegisterModal(props: any) {
         },
         {
             label: 'Step 3',
-            component: <Step2 form={form} setForm={setForm} setIndex={setIndex} />
+            component: <Step3 form={form} setForm={setForm} setIndex={setIndex} submitForm={submitForm} />
         },
     ]
     useEffect(() => {
@@ -189,14 +203,14 @@ export function RegisterModal(props: any) {
 }
 
 function Step1(props: { form: FormProps, setForm: React.Dispatch<React.SetStateAction<FormProps>>, setIndex: any }) {
-    const [email, setEmail] = useState(props.form.email)
-    const [password, setPassword] = useState(props.form.password)
+    const [email, setEmail] = useState<string|undefined>(props.form.user.email)
+    const [password, setPassword] = useState(props.form.user.password)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState<string>()
     const handleSubmit = (e: any) => {
         e.preventDefault()
         if (password === confirmPassword) {
-            props.setForm({ ...props.form, email: email, password: password })
+            props.setForm({ ...props.form, user: {...props.form.user, email: email, password: password} })
             props.setIndex(1)
         }
         else { setError('Password does not match!') }
@@ -212,14 +226,14 @@ function Step1(props: { form: FormProps, setForm: React.Dispatch<React.SetStateA
 }
 
 function Step2(props: { form: FormProps, setForm: React.Dispatch<React.SetStateAction<FormProps>>, setIndex: any }) {
-    const [firstName, setFirstName] = useState(props.form.first_name)
-    const [lastName, setLastName] = useState(props.form.last_name)
+    const [firstName, setFirstName] = useState(props.form.user.first_name)
+    const [lastName, setLastName] = useState(props.form.user.last_name)
     const [phone, setPhone] = useState(props.form.phone)
     const [gender, setGender] = useState(props.form.gender)
     const [age, setAge] = useState(props.form.age)
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        props.setForm({ ...props.form, first_name: firstName, last_name: lastName, phone: phone })
+        props.setForm({ ...props.form, phone: phone, gender: gender, age: age, user: {...props.form.user, first_name: firstName, last_name: lastName,}})
         props.setIndex(2)
     }
     return (
@@ -228,10 +242,42 @@ function Step2(props: { form: FormProps, setForm: React.Dispatch<React.SetStateA
             <InputField placeholder='Last Name' required={true} value={lastName} onChange={e => setLastName(e.target.value)} />
             <InputField placeholder='Phone Number' required={true} value={phone} onChange={e => setPhone(e.target.value)} />
             <SelectField placeholder='Gender' onChange={e => setGender(e.target.value)} option={[['Male', 'M'], ['Female', 'F']]} />
-            <SelectField placeholder='Age Range' onChange={e => setGender(e.target.value)} option={[['18 - 25', 'Young'], ['25 - 50', 'Youth'], ['50 - Above', 'Old']]} />
+            <SelectField placeholder='Age Range' onChange={e => setAge(e.target.value)} option={[['18 - 25', 'Young'], ['25 - 50', 'Youth'], ['50 - Above', 'Old']]} />
             <div>
                 <SubmitButton label='Next' loading={false} className={styles.submit_button} />
                 <Button text='Back' type='button' onClick={() => props.setIndex(0)} className={styles.back_button} />
+            </div>
+        </form>
+    )
+}
+
+
+function Step3(props: { form: FormProps, setForm: React.Dispatch<React.SetStateAction<FormProps>>, setIndex: any, submitForm:any }) {
+    const [country, setCountry] = useState(props.form.country)
+    const [state, setState] = useState(props.form.state)
+    const [address, setAddress] = useState(props.form.address)
+    const [nationality, setNationality] = useState(props.form.nationality)
+    const [channel, setChannel] = useState(props.form.channel)
+    const [cheked, setCheked] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const handleSubmit = async(e: any) => {
+        e.preventDefault()
+        props.setForm({ ...props.form, country: country, state: state, address: address, nationality: nationality, channel: channel })
+        setLoading(true)
+        const res = await props.submitForm()
+        setLoading(res)
+    }
+    return (
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <InputField placeholder='Country' required={true} value={country} onChange={e => setCountry(e.target.value)} />
+            <InputField placeholder='State' required={true} value={state} onChange={e => setState(e.target.value)} />
+            <InputField placeholder='Address' required={true} value={address} onChange={e => setAddress(e.target.value)} />
+            <InputField placeholder='Nationality' required={true} value={nationality} onChange={e => setNationality(e.target.value)} />
+            <InputField placeholder='How Did You Hear About Spark Force?' required={true} value={channel} onChange={e => setChannel(e.target.value)} />
+            <CheckBoxField label='I agree to the SPARKFORCE terms an conditions' checked={cheked} onChange={(e)=> setCheked(e.target.checked)} />
+            <div>
+                <SubmitButton label='Submit' loading={loading ? loading : !cheked} className={styles.submit_button} />
+                <Button text='Back' type='button' onClick={() => props.setIndex(1)} className={styles.back_button} />
             </div>
         </form>
     )

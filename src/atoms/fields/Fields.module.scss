@@ -31,3 +31,13 @@
 .error_field {
     border-color: red;
 }
+
+.checkbox {
+    display: flex;
+    flex-flow: row nowrap;
+    > label {
+        font-size: 14px;
+        margin-left: 10px;
+        align-items: center;
+    }
+}
