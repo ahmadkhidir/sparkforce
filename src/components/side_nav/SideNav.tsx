@@ -62,7 +62,7 @@ export default function SideNav({ show, setShow }: SideNavProps) {
 			<NavButton>Our Team</NavButton>
 			<NavButton>Testimonials</NavButton>
 			<NavButton onClick={()=>dispatch(openModal('login'))}>Login</NavButton>
-			<NavButton>Join Sparkforce</NavButton>
+			<NavButton onClick={()=>dispatch(openModal('register'))}>Join Sparkforce</NavButton>
 		</SideNavContainer>
 	)
 }
