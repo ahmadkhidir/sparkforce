@@ -6,7 +6,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-    current: ['register']
+    current: []
 }
 
 const modalSlice = createSlice({
