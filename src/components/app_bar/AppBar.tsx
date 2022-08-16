@@ -28,7 +28,7 @@ export default function AppBar(props: any) {
 					</div>
 					<div className={styles.auths}>
 						<TextButton text='Login' onClick={()=>dispatch(openModal('login'))} />
-						<Button text='Join Spark Force' onClick={() => 1} />
+						<Button text='Join Spark Force' onClick={()=>dispatch(openModal('register'))} />
 					</div>
 					<Menu className={styles.mobile_nav_menu} onClick={() => setShowSideNav(true)} />
 				</div>
