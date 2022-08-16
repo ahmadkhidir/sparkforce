@@ -54,13 +54,17 @@ export function LoginModal(props: any) {
     useEffect(() => {
         if (error) setLoading(false)
     }, [error])
+    const handleRegisterButton = () => {
+        dispatch(closeModal('login'))
+        dispatch(openModal('register'))
+    }
 
 
     return (
         <ModalContainer onClose={() => dispatch(closeModal('login'))}>
             <div className={styles.flexSB}>
                 <h2>Log in</h2>
-                <TextButton text='Join Spark Force' className={styles.underline} />
+                <TextButton text='Join Spark Force' className={styles.underline} onClick={handleRegisterButton} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <InputField placeholder='Email' required={true} value={email} onChange={e => setEmail(e.target.value)} />
@@ -184,11 +188,16 @@ export function RegisterModal(props: any) {
         return undefined
     }
 
+    const handleLoginButton = () => {
+        dispatch(closeModal('register'))
+        dispatch(openModal('login'))
+    }
+
     return (
-        <ModalContainer onClose={() => dispatch(closeModal('login'))}>
+        <ModalContainer onClose={() => dispatch(closeModal('register'))}>
             <div className={styles.flexSB}>
                 <h2>Join Spark Force</h2>
-                <TextButton text='Login' className={styles.underline} />
+                <TextButton text='Login' className={styles.underline} onClick={handleLoginButton} />
             </div>
             <section className={styles.steps}>
                 {steps.map((item, i) => (

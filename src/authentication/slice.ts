@@ -45,8 +45,8 @@ export const populateAuthAsync = createAsyncThunk(
     'auth/populate',
     async () => {
         const user_token = localStorage.getItem('user_token')
-        const res = await checkUserValidity(user_token!)
-        return res.data.detail
+        const res = user_token && await checkUserValidity(user_token!)
+        return res ? res.data.detail : false
     }
 )
 
@@ -86,8 +86,9 @@ const authSlice = createSlice({
         builder
             .addCase(populateAuthAsync.fulfilled,
                 (state, action) => {
-                    if (action.payload) {
-                        state.authenticated = action.payload
+                    console.log(action.payload, localStorage.getItem('user_token'))
+                    if (action.payload === true) {
+                        state.authenticated = true
                         state.user_token = localStorage.getItem('user_token')
                     }
                     else {localStorage.removeItem('user_token')}
