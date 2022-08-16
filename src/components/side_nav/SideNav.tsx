@@ -1,5 +1,7 @@
 import styles from './SideNav.module.scss'
 import close_ic from './assets/close.svg'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { openModal } from '../modal/modalSlice'
 
 interface SideNavProps {
 	show?: boolean
@@ -40,12 +42,26 @@ export function NavButton(props:{children: any, onClick?: () => any}) {
 }
 
 export default function SideNav({ show, setShow }: SideNavProps) {
+	const dispatch = useAppDispatch()
+	const isAuthenticated = useAppSelector(state=>state.auth.authenticated)
+	if (isAuthenticated) {
+		return (
+			<SideNavContainer show={show} setShow={setShow}>
+			<NavButton>Home</NavButton>
+			<NavButton>Profile</NavButton>
+			<NavButton>Wallet</NavButton>
+			<NavButton>Change Password</NavButton>
+			<NavButton>Delete Account</NavButton>
+			<NavButton>Logout</NavButton>
+		</SideNavContainer>
+		)
+	}
 	return (
 		<SideNavContainer show={show} setShow={setShow}>
 			<NavButton>About US</NavButton>
 			<NavButton>Our Team</NavButton>
 			<NavButton>Testimonials</NavButton>
-			<NavButton>Login</NavButton>
+			<NavButton onClick={()=>dispatch(openModal('login'))}>Login</NavButton>
 			<NavButton>Join Sparkforce</NavButton>
 		</SideNavContainer>
 	)

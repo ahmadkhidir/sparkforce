@@ -15,9 +15,12 @@
 			height: 18px;
 		}
 
-		>.navs {
+		>.navs, >.auths {
 			display: flex;
 			flex-flow: row nowrap;
+		}
+		>.auths > * {
+			margin-left: 16px;
 		}
 
 		>.mobile_nav_menu {

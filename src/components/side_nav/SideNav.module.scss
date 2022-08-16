@@ -1,9 +1,11 @@
 @keyframes overlay_show {
     0% {
         background-color: rgba(0,0,0,0);
+        backdrop-filter: blur(0px);
     }
     100% {
-        background-color: rgba(0,0,0,0.7);
+        background-color: rgba(0,0,0,.5);
+        backdrop-filter: blur(5px);
     }
 }
 @keyframes overlay_hide {
@@ -62,7 +64,8 @@
     }
     &_hide {
         @extend %side_nav;
-        animation: overlay_hide 1 200ms ease-out forwards;
+        // animation: overlay_hide 1 200ms ease-out forwards;
+        visibility: hidden
     }
 }
 
@@ -74,7 +77,8 @@
         }
         &_hide {
             @extend %nav;
-            animation: slide_in 1 200ms ease-out forwards;
+            // animation: slide_in 1 200ms ease-out forwards;
+            visibility: hidden;
         }
     }
 

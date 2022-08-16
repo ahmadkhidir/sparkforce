@@ -7,14 +7,21 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 
 import { BrowserRouter } from "react-router-dom"
+import ModalRoute from './components/modal/Modal';
+import { populateAuthAsync } from './authentication/slice';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+
+// ----------- Initializing -------------- //
+store.dispatch(populateAuthAsync())
+// ----------------------------------------//
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        <ModalRoute />
         <App />
       </BrowserRouter>
     </Provider>
