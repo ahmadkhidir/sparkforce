@@ -1,7 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import modalSlice from '../components/modal/modalSlice';
+import authSlice from '../authentication/slice';
 
 export const store = configureStore({
   reducer: {
+    modal: modalSlice,
+    auth: authSlice
   },
 });
 
