@@ -1,0 +1,39 @@
+.profile_card {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    border-top: 1px dashed #DBDEE7;
+    padding-top: 20px;
+
+    >.content {
+        flex: 1;
+        margin: 0 16px;
+
+        >h2 {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+
+        >p {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+    }
+
+    >.btn {
+        height: 30px;
+        width: 30px;
+        padding: 7px;
+        background-color: transparent;
+        border: 0;
+
+        > img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
