@@ -52,7 +52,7 @@ export const populateAuthAsync = createAsyncThunk(
 
 interface InitialState {
     user_token: string | null,
-    error_message: string | null
+    error_message: string | undefined
     authenticated: boolean,
     credentials: null | {
         email: string | null,
@@ -62,7 +62,7 @@ interface InitialState {
 
 const initialState: InitialState = {
     user_token: null,
-    error_message: null,
+    error_message: undefined,
     authenticated: false,
     credentials: null
 }
@@ -81,6 +81,10 @@ const authSlice = createSlice({
             state.authenticated = action.payload.auth
             state.user_token = action.payload.token
         },
+        logout: (state) => {
+            state.authenticated = false
+            state.user_token = null
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -99,11 +103,11 @@ const authSlice = createSlice({
                 loginAsync.pending
             ),
                 (state) => {
-                    state.error_message = null
+                    state.error_message = undefined
                 }
             )
     }
 })
 
-// export const { } = authSlice.actions
+export const { logout } = authSlice.actions
 export default authSlice.reducer

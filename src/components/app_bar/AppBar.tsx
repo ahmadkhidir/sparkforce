@@ -46,13 +46,13 @@ export function AppBarAfterLogin(props: any) {
 		<Fragment>
 			<SideNav show={showSideNav} setShow={setShowSideNav} />
 			<nav className={styles.app_bar}>
-				<div className={styles.container}>
+				<div className={styles.max_container}>
+					<Menu className={styles.nav_menu} onClick={() => setShowSideNav(true)} />
 					<Logo />
 					<div className={styles.auths}>
 						<Notification value={10} />
 						<Avatar size={40} image={avatar_ic} />
 					</div>
-					<Menu className={styles.mobile_nav_menu} onClick={() => setShowSideNav(true)} />
 				</div>
 			</nav>
 		</Fragment>

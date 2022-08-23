@@ -1,9 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import styles from './Modal.module.scss'
 import { Modal } from './modalRegistry'
-import { closeModal, openModal } from './modalSlice'
+import { closeModal, closeSucessModal, openModal, openSucessModal } from './modalSlice'
 import close_ic from './assets/close_ic.svg'
 import logo from './assets/logo.svg'
+import success from './assets/checkbox.svg'
 import { Button, SubmitButton, TextButton } from '../../atoms/buttons/Buttons'
 import { CheckBoxField, InputField, SelectField } from '../../atoms/fields/Fields'
 import { Fragment, useEffect, useState } from 'react'
@@ -67,7 +68,7 @@ export function LoginModal(props: any) {
                 <TextButton text='Join Spark Force' className={styles.underline} onClick={handleRegisterButton} />
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <InputField placeholder='Email' required={true} value={email} onChange={e => setEmail(e.target.value)} />
+                <InputField placeholder='Email' required={true} value={email} onChange={e => setEmail(e.target.value)} error={error} />
                 <InputField placeholder='Password' required={true} type='password' value={password} onChange={e => setPassword(e.target.value)} />
                 <TextButton text='Forgot password?' className={styles.forget_paswd} />
                 <SubmitButton loading={loading} className={styles.submit_button} />
@@ -102,7 +103,7 @@ export function VerifyModal(props: any) {
             </div>
             <p className={styles.info}>Kindly provide the Four (4) digit code sent to your email</p>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <InputField placeholder='OTP' required={true} value={otp} onChange={e => setOtp(e.target.value)} />
+                <InputField placeholder='OTP' required={true} value={otp} onChange={e => setOtp(e.target.value)} error={error} />
                 <SubmitButton label='Confirm' loading={loading} className={styles.submit_button} />
             </form>
         </ModalContainer>
@@ -152,7 +153,7 @@ export function RegisterModal(props: any) {
         try {
             console.log(form)
             const res = await register(form)
-            alert('success')
+            dispatch(openSucessModal('Your account has been created successfully. Kindly login with your credentials'))
             return true
         } catch (error) {
             console.log(error)
@@ -289,5 +290,25 @@ function Step3(props: { form: FormProps, setForm: React.Dispatch<React.SetStateA
                 <Button text='Back' type='button' onClick={() => props.setIndex(1)} className={styles.back_button} />
             </div>
         </form>
+    )
+}
+
+
+export function SuccessModal(props: any) {
+    const dispatch = useAppDispatch()
+    const message = useAppSelector(state => state.modal.message)
+    const handleBack = () => {
+        dispatch(closeSucessModal())
+        dispatch(openModal('login'))
+    }
+    return (
+        <ModalContainer onClose={() => dispatch(closeSucessModal())}>
+            <div className={styles.flexSB}>
+                <h2>Done</h2>
+                <TextButton text='Login' className={styles.underline} onClick={handleBack} />
+            </div>
+            <p className={styles.info}>{message}</p>
+            <img src={success} className={styles.success} />
+        </ModalContainer>
     )
 }

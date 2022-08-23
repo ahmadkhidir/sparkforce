@@ -1,10 +1,14 @@
 import styles from './Avatar.module.scss'
 import bell_ic from './assets/bell.svg'
+import classNames from 'classnames'
 
-export default function Avatar({size, image}) {
+const c = classNames
+
+
+export default function Avatar({size, image, className=null}) {
     return (
-        <div className={styles.avatar} style={{width: size, height: size}}>
-            <img src={image} />
-        </div>
+        <section className={c(styles.avatar, className)} style={{width: size, height: size}}>
+            <img src={image} alt='avatar' />
+        </section>
     )
 }

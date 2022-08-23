@@ -1,7 +1,7 @@
-import { LoginModal, RegisterModal, VerifyModal } from "./Modal";
+import { LoginModal, RegisterModal, SuccessModal, VerifyModal } from "./Modal";
 
 export type ModalAction = (
-    'login' | 'register' | 'verify'
+    'login' | 'register' | 'verify' | 'success'
 )
 
 
@@ -17,5 +17,9 @@ export const Modal: {name: ModalAction, component: JSX.Element}[] = [
     {
         name: "register",
         component: <RegisterModal />
+    },
+    {
+        name: "success",
+        component: <SuccessModal />
     }
 ]
