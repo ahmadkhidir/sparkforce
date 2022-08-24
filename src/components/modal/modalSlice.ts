@@ -18,7 +18,7 @@ const modalSlice = createSlice({
         openModal: (state, action: PayloadAction<ModalAction>) => {
             const i = state.current.indexOf(action.payload)
             if (i !== -1) {
-                state.current.splice(i)
+                state.current.splice(i, 1)
                 state.current.push(action.payload)
             } else {
                 state.current.push(action.payload)
@@ -27,7 +27,7 @@ const modalSlice = createSlice({
         closeModal: (state, action: PayloadAction<ModalAction>) => {
             const i = state.current.indexOf(action.payload)
             if (i !== -1) {
-                state.current.splice(i)
+                state.current.splice(i, 1)
             }
         },
         closeAllModal: (state) => {
@@ -40,7 +40,7 @@ const modalSlice = createSlice({
         closeSucessModal: (state) => {
             state.message = null
             const i = state.current.indexOf("success")
-            state.current.splice(i)
+            state.current.splice(i, 1)
         },
     }
 })
