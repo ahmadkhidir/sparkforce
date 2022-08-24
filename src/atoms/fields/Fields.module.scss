@@ -1,7 +1,8 @@
 .field_container {
     position: relative;
     box-sizing: border-box;
-    > .error {
+
+    >.error {
         color: red;
         font-size: 12px;
     }
@@ -35,9 +36,43 @@
 .checkbox {
     display: flex;
     flex-flow: row nowrap;
-    > label {
+
+    >label {
         font-size: 14px;
         margin-left: 10px;
         align-items: center;
+    }
+}
+
+.search_field {
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 6px;
+    overflow: hidden;
+
+    >input {
+        border-radius: 0;
+        border: 0;
+    }
+
+    >button {
+        width: 80px;
+        border: 0;
+        border-radius: 0;
+        background-color: white;
+        transition: all .2s;
+
+        &:hover {
+            background-color: #b9adad;
+        }
+
+        &:last-of-type {
+            background-color: black;
+
+            &:hover {
+                background-color: #272727;
+            }
+        }
+
     }
 }

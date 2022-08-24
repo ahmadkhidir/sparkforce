@@ -2,6 +2,8 @@ import styles from './SideNav.module.scss'
 import close_ic from './assets/close.svg'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { openModal } from '../modal/modalSlice'
+import { logout } from '../../authentication/slice'
+import { ProfileCard } from '../profile_card/ProfileCard'
 
 interface SideNavProps {
 	show?: boolean
@@ -33,7 +35,7 @@ function SideNavContainer({ show, setShow, children, footer }: SideNavProps) {
 	)
 }
 
-export function NavButton(props:{children: any, onClick?: () => any}) {
+export function NavButton(props: { children: any, onClick?: () => any }) {
 	return (
 		<button className={styles.nav_button} onClick={props.onClick}>
 			{props.children}
@@ -43,17 +45,17 @@ export function NavButton(props:{children: any, onClick?: () => any}) {
 
 export default function SideNav({ show, setShow }: SideNavProps) {
 	const dispatch = useAppDispatch()
-	const isAuthenticated = useAppSelector(state=>state.auth.authenticated)
+	const isAuthenticated = useAppSelector(state => state.auth.authenticated)
 	if (isAuthenticated) {
 		return (
-			<SideNavContainer show={show} setShow={setShow}>
-			<NavButton>Home</NavButton>
-			<NavButton>Profile</NavButton>
-			<NavButton>Wallet</NavButton>
-			<NavButton>Change Password</NavButton>
-			<NavButton>Delete Account</NavButton>
-			<NavButton>Logout</NavButton>
-		</SideNavContainer>
+			<SideNavContainer show={show} setShow={setShow} footer={<ProfileCard />}>
+				<NavButton>Home</NavButton>
+				<NavButton>Profile</NavButton>
+				<NavButton>Wallet</NavButton>
+				<NavButton>Change Password</NavButton>
+				<NavButton>Delete Account</NavButton>
+				<NavButton onClick={() => dispatch(logout())}>Logout</NavButton>
+			</SideNavContainer>
 		)
 	}
 	return (
@@ -61,8 +63,8 @@ export default function SideNav({ show, setShow }: SideNavProps) {
 			<NavButton>About US</NavButton>
 			<NavButton>Our Team</NavButton>
 			<NavButton>Testimonials</NavButton>
-			<NavButton onClick={()=>dispatch(openModal('login'))}>Login</NavButton>
-			<NavButton onClick={()=>dispatch(openModal('register'))}>Join Sparkforce</NavButton>
+			<NavButton onClick={() => dispatch(openModal('login'))}>Login</NavButton>
+			<NavButton onClick={() => dispatch(openModal('register'))}>Join Sparkforce</NavButton>
 		</SideNavContainer>
 	)
 }

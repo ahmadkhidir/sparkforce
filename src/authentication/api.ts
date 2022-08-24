@@ -25,3 +25,9 @@ export async function checkUserValidity(token: string) {
         token: token
     })
 }
+
+export async function checkUserConflict(email: string) {
+    return await client.POST('check_user_registration_conflict/', undefined, {
+        email: email
+    })
+}

@@ -15,7 +15,6 @@ export default function Footer(props: any) {
         <footer className={styles.footer}>
             <div className={styles.head}>
                 <h1>Get unlimited opportunities to boost your career</h1>
-                <Button text='Join Waitlist' onClick={() => navigate('/waitlist')} />
                 <hr />
                 <img src={logo} alt='logo' />
                 <p>Explore the world of unlimited opportunities to boost your career</p>

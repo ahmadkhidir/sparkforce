@@ -1,7 +1,7 @@
 .app_bar {
 	background-color: white;
 
-	>.container {
+	>.container, .max_container {
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 30px;
@@ -26,6 +26,12 @@
 		>.mobile_nav_menu {
 			display: none;
 		}
+		> .nav_menu {
+			margin-right: 20px;
+		}
+	}
+	> .max_container > .auths {
+		margin-left: auto;
 	}
 }
 

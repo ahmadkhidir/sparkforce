@@ -1,10 +1,12 @@
 .header {
-    > .video {
+    >.video {
         height: 550px;
     }
-    > .caption {
+
+    >.caption {
         background-color: #f1f1f1;
-        > .container {
+
+        >.container {
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
@@ -12,7 +14,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 15px 30px;
-            > p {
+
+            >p {
                 font-weight: 700;
                 font-size: 18px;
                 margin-right: 30px;
@@ -22,18 +25,54 @@
     }
 }
 
+.header_after_login {
+    background-color: #CFE0FC;
+    border-bottom-right-radius: 70% 20%;
+    border-bottom-left-radius: 70% 20%;
+    color: #000;
+    text-align: center;
+    padding: 100px 30px 70px;
+
+    >section {
+        max-width: 700px;
+        margin: 0 auto;
+
+        >p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        >h1 {
+            font-size: 45px;
+            line-height: 1.5;
+            margin: 30px 0 40px;
+        }
+    }
+
+}
+
 
 @media (max-width: 500px) {
-    .header > .video {
+    .header>.video {
         height: 450px;
+    }
+
+    .header_after_login {
+        border-bottom-right-radius: 50% 10%;
+        border-bottom-left-radius: 50% 10%;
+
+        >section>h1 {
+            font-size: 22px;
+            margin-top: 15px;
+        }
     }
 }
 
 @media (max-width: 414px) {
-    .header > .caption > .container {
+    .header>.caption>.container {
         flex-flow: column;
-        
-        > p {
+
+        >p {
             margin-right: 0;
             margin-bottom: 20px;
             text-align: center;
