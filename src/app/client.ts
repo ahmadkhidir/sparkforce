@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const token = localStorage.getItem('user_token')
 
-const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/v1/' : 'https://sparkforce-app-wc9zp.ondigitalocean.app'
+const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/v1/' : 'https://sparkforce-app-wc9zp.ondigitalocean.app/v1/'
 
 const _client = axios.create({baseURL: BASE_URL, headers: {
     'Authorization': `Token ${token!}`,
