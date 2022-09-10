@@ -1,0 +1,318 @@
+@keyframes roller {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.page {
+    width: 100%;
+}
+
+.header {
+    background-color: #F9F9F9;
+    padding: 24px 30px;
+
+    >div {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        >h1 {
+            font-size: 22px;
+            margin-top: 25px;
+        }
+    }
+}
+
+.profile {
+    height: 230px;
+    background-size: cover;
+    background-position: top left;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 60px;
+
+    >.wrapper {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+
+        >.container {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+
+            >.avatar {
+                order: 1;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                padding: 10px;
+                background-color: white;
+                margin-bottom: -60px;
+
+                >img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            >.content {
+                order: 2;
+                color: white;
+                flex: 1 1 300px;
+                margin-left: 16px;
+
+                >h2 {
+                    font-size: 22px;
+                    margin-bottom: 6px;
+                }
+
+                >p {
+                    font-size: 14px;
+                }
+            }
+
+            >.actions {
+                order: 3;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                column-gap: 10px;
+
+                >.register_btn {
+                    background-color: white;
+                    color: black;
+                    height: 40px;
+                }
+            }
+        }
+
+    }
+
+}
+
+.sec2 {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 30px;
+
+    >.container {
+        box-sizing: border-box;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 190px;
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        border-bottom: 1px dashed #DBDEE7;
+
+        >.ratings {
+            display: flex;
+            flex-flow: row nowrap;
+            column-gap: 5px;
+            align-items: center;
+        }
+
+        >.rating_count {
+            margin-left: 16px;
+            margin-right: 37px;
+            margin-top: 2px;
+            font-size: 14px;
+        }
+
+        >.time {
+            flex: 1;
+            display: flex;
+            flex-flow: row nowrap;
+            column-gap: 12px;
+            white-space: nowrap;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        >.cost {
+            font-size: 36px;
+        }
+    }
+}
+
+.section {
+    box-sizing: border-box;
+    padding: 0 30px;
+    margin-bottom: 34px;
+
+    >* {
+        box-sizing: border-box;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 18px;
+        text-transform: capitalize;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    p,
+    li {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    ul {
+
+        // margin-left: 0;
+        >li {
+            margin-left: -25px;
+        }
+    }
+
+    .skills {
+        ul {
+            display: flex;
+            flex-flow: row wrap;
+            list-style: none;
+            gap: 10px 5px;
+            margin-left: -40px;
+
+            li {
+                padding: 8px 25px;
+                border: 1px solid black;
+                border-radius: 30px;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.btn_container {
+    box-sizing: border-box;
+    padding: 0 30px;
+    width: 100%;
+    display: flex;
+
+    >* {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+
+.loading {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >.roller {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 5px dotted #333;
+        border-width: 10px;
+        animation: roller 2.5s infinite linear;
+    }
+}
+
+@media (max-width: 750px) {
+    .profile {
+        margin-bottom: 150px;
+
+        >.wrapper>.container {
+            >.content {
+                color: black;
+                order: 3;
+                margin-bottom: -220px;
+                margin-left: 0;
+            }
+
+            >.actions {
+                order: 2;
+                margin-left: auto;
+            }
+        }
+    }
+    .sec2>.container {
+        padding-left: 0;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+    .profile {
+        height: 180px;
+        margin-bottom: 160px;
+        >.wrapper>.container {
+            >.avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            >.content {
+                >h2 {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .sec2 {
+        >.container {
+    
+            >.ratings {
+                order: 1;
+            }
+    
+            >.rating_count {
+                order: 2;
+            }
+    
+            >.time {
+                order: 4;
+                min-width: 100%;
+                margin-top: 10px;
+            }
+    
+            >.cost {
+                order: 3;
+                margin-left: auto;
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .profile {
+        >.wrapper>.container {
+            >.avatar {
+                width: 100px;
+                height: 100px;
+            }
+            >.actions {
+                >.register_btn {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

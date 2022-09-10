@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { openModal } from '../modal/modalSlice'
 import { logout } from '../../authentication/slice'
 import { ProfileCard } from '../profile_card/ProfileCard'
+import { useNavigate } from 'react-router-dom'
 
 interface SideNavProps {
 	show?: boolean
@@ -45,11 +46,12 @@ export function NavButton(props: { children: any, onClick?: () => any }) {
 
 export default function SideNav({ show, setShow }: SideNavProps) {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 	const isAuthenticated = useAppSelector(state => state.auth.authenticated)
 	if (isAuthenticated) {
 		return (
 			<SideNavContainer show={show} setShow={setShow} footer={<ProfileCard />}>
-				<NavButton>Home</NavButton>
+				<NavButton onClick={() => navigate('/')}>Home</NavButton>
 				<NavButton>Profile</NavButton>
 				<NavButton>Wallet</NavButton>
 				<NavButton>Change Password</NavButton>

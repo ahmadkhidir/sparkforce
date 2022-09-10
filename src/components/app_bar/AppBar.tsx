@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../app/hooks'
 import Avatar from '../../atoms/avatar/Avatar'
 import { Button, TextButton } from '../../atoms/buttons/Buttons'
 import Logo from '../../atoms/logo/Logo'
-import Menu from '../../atoms/menu/Menu'
+import Menu, { Search } from '../../atoms/icons/Icons'
 import Notification from '../../atoms/notification/Notification'
 import { openModal } from '../modal/modalSlice'
 import SideNav from '../side_nav/SideNav'
@@ -50,7 +50,8 @@ export function AppBarAfterLogin(props: any) {
 					<Menu className={styles.nav_menu} onClick={() => setShowSideNav(true)} />
 					<Logo />
 					<div className={styles.auths}>
-						<Notification value={10} />
+						{props.search && <Search />}
+						<Notification value={0} />
 						<Avatar size={40} image={avatar_ic} />
 					</div>
 				</div>

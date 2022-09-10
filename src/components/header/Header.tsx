@@ -24,9 +24,11 @@ export default function Header(props: any) {
 
 
 export function HeaderAfterLogin(props: any) {
+	const navigate = useNavigate()
 	const [search, setSearch] = useState('')
 	const handleSubmit = (e:any) => {
 		e.preventDefault()
+		navigate(`/search/${search}`)
 	}
 	return (
 		<header className={styles.header_after_login}>

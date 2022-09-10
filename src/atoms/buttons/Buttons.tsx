@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import styles from './Buttons.module.scss'
 import { ButtonProps } from './utils'
+import share_ic from './assets/share.svg'
 
 const c = classNames
 
@@ -44,5 +45,11 @@ export function SubmitButton(props: { className?: string, loading: boolean, arro
 			</svg>
 		}
 		</button>
+	)
+}
+
+export function ShareButton(props:{id:any}) {
+	return (
+		<button className={styles.share_button}><img src={share_ic} alt="share" /></button>
 	)
 }
