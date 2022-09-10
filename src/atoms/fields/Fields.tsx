@@ -26,9 +26,9 @@ export function InputField(props: InputProps) {
 export function SearchField(props: SearchProps) {
     
     return (
-        <div className={styles.field_container}>
+        <div className={c(styles.field_container, props.className)}>
             <div className={styles.search_field}>
-                <input {...props} type={'search'} className={c(styles.field, props.error && styles.error_field, props.className)} />
+                <input {...props} type={'text'} className={c(styles.field, props.error && styles.error_field)} />
                 <button type='reset' onClick={props.onClear}><img src={close_ic} alt='reset' /></button>
                 <button type='submit'><img src={search_ic} alt='search' /></button>
             </div>
