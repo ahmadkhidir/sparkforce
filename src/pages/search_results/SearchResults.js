@@ -26,6 +26,7 @@ export default function SearchResults() {
     const [now, setNow] = useState(new Date())
     const [offset, setOffset] = useState(DEFAULT_OFFSET)
     const [isNext, setIsNext] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const dt = new Date()
@@ -36,6 +37,7 @@ export default function SearchResults() {
     }, [])
 
     useEffect(() => {
+        setIsLoading(true)
         fetchLearningContent({
             search: searchField,
             posted_gte: datePostedGteFilter,
@@ -46,6 +48,7 @@ export default function SearchResults() {
             .then(res => {
                 setItems(res.data.results)
                 setIsNext(res.data.next ? true : false)
+                setIsLoading(false)
                 console.log(res.data)
             })
     }, [search, datePostedGteFilter, datePostedLteFilter, costFilter])
@@ -129,7 +132,8 @@ export default function SearchResults() {
                 </div>
             </section>
             <section className={styles.items}>
-                {items.length === 0 && <p style={{ textAlign: 'center' }}>No records found</p>}
+            {isLoading && <p style={{ textAlign: 'center' }}>Fetching...</p>}
+                {!isLoading && items.length === 0 && <p style={{ textAlign: 'center' }}>No records found</p>}
                 {items.map((item) => (
                     <LearningContentLongContainer key={item.id} {...item} />
                 ))}

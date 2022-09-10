@@ -1,3 +1,14 @@
+@keyframes roller {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 .page {
     width: 100%;
 }
@@ -206,6 +217,22 @@
     }
 }
 
+
+.loading {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >.roller {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 5px dotted #333;
+        border-width: 10px;
+        animation: roller 2.5s infinite linear;
+    }
+}
 
 @media (max-width: 750px) {
     .profile {

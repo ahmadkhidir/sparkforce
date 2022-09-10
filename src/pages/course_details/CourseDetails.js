@@ -95,7 +95,7 @@ export default function CourseDetails() {
                         </div>
                     </section> */}
                 </section>
-                : <section>Loading...</section>
+                : <section className={styles.loading}><div className={styles.roller}></div></section>
             }
             <Footer />
         </ListView>
