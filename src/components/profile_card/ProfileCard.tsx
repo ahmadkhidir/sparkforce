@@ -1,15 +1,25 @@
 import Avatar from "../../atoms/avatar/Avatar";
 import styles from './ProfileCard.module.scss'
-import img_ic from './assets/avatar.jpeg'
+import img_ic from './assets/avatar.svg'
 import arrow_ic from './assets/arrow.svg'
+import { useEffect, useState } from "react";
+import { fetchUserInfo } from "./ProfileCardApi";
 
 export function ProfileCard(props: any) {
+    const [user, setUser] = useState<any>()
+    useEffect(() => {
+      fetchUserInfo()
+      .then(res=> {
+        console.log(res.data)
+        setUser(res.data)})
+    }, [])
+    
     return (
         <section className={styles.profile_card}>
             <Avatar image={img_ic} size={65} />
             <div className={styles.content}>
-                <h2>Mao Chin John</h2>
-                <p>Public Health Data Scientist</p>
+                <h2>{user && user.first_name + " " + user.last_name}</h2>
+                <p></p>
             </div>
             <button className={styles.btn}>
                 <img src={arrow_ic} alt={'arrow'} />

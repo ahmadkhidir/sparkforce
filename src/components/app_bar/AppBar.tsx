@@ -9,7 +9,7 @@ import Notification from '../../atoms/notification/Notification'
 import { openModal } from '../modal/modalSlice'
 import SideNav from '../side_nav/SideNav'
 import styles from './AppBar.module.scss'
-import avatar_ic from './assets/avatar.jpeg'
+import avatar_ic from './assets/avatar.svg'
 
 export default function AppBar(props: any) {
 	const dispatch = useAppDispatch()
