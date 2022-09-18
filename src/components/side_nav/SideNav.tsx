@@ -54,7 +54,7 @@ export default function SideNav({ show, setShow }: SideNavProps) {
 				<NavButton onClick={() => navigate('/')}>Home</NavButton>
 				<NavButton>Profile</NavButton>
 				<NavButton>Wallet</NavButton>
-				<NavButton>Change Password</NavButton>
+				<NavButton onClick={() => dispatch(openModal('change_password'))}>Change Password</NavButton>
 				<NavButton>Delete Account</NavButton>
 				<NavButton onClick={() => dispatch(logout())}>Logout</NavButton>
 			</SideNavContainer>

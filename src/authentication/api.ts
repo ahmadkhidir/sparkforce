@@ -31,3 +31,10 @@ export async function checkUserConflict(email: string) {
         email: email
     })
 }
+
+export async function changePassword(old_password: string, new_password: string) {
+    return await client.POST('change_password/', {
+        old_password: old_password,
+        new_password: new_password,
+    })
+}

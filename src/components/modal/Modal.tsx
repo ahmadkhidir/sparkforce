@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import styles from './Modal.module.scss'
 import { Modal } from './modalRegistry'
-import { closeModal, closeSucessModal, openModal, openSucessModal } from './modalSlice'
+import { closeErrorModal, closeModal, closeSucessModal, openModal, openSucessModal } from './modalSlice'
 import close_ic from './assets/close_ic.svg'
 import logo from './assets/logo.svg'
 import success from './assets/checkbox.svg'
@@ -9,7 +9,7 @@ import error from './assets/error.svg'
 import { Button, SubmitButton, TextButton } from '../../atoms/buttons/Buttons'
 import { CheckBoxField, InputField, SelectField } from '../../atoms/fields/Fields'
 import { createContext, Fragment, useContext, useEffect, useReducer, useState } from 'react'
-import { getOTPAsync, loginAsync, registerAsync, regStep1, regStep2, regStep3, updateRegLoading } from '../../authentication/slice'
+import { changePasswordAsync, getOTPAsync, loginAsync, registerAsync, regStep1, regStep2, regStep3, updateRegLoading } from '../../authentication/slice'
 import { checkUserConflict, register } from '../../authentication/api'
 import { type } from '@testing-library/user-event/dist/types/setup/directApi'
 
@@ -280,6 +280,7 @@ function Step3({setIndex}:any) {
 export function SuccessModal(props: any) {
     const dispatch = useAppDispatch()
     const message = useAppSelector(state => state.modal.message)
+    const show_login = useAppSelector(state => state.modal.show_login)
     const handleBack = () => {
         dispatch(closeSucessModal())
         dispatch(openModal('login'))
@@ -288,7 +289,7 @@ export function SuccessModal(props: any) {
         <ModalContainer onClose={() => dispatch(closeSucessModal())}>
             <div className={styles.flexSB}>
                 <h2>Done</h2>
-                <TextButton text='Login' className={styles.underline} onClick={handleBack} />
+                {show_login && <TextButton text='Login' className={styles.underline} onClick={handleBack} />}
             </div>
             <p className={styles.info}>{message}</p>
             <img src={success} className={styles.success} />
@@ -300,13 +301,52 @@ export function ErrorModal(props: any) {
     const dispatch = useAppDispatch()
     const message = useAppSelector(state => state.modal.message)
     return (
-        <ModalContainer onClose={() => dispatch(closeSucessModal())}>
+        <ModalContainer onClose={() => dispatch(closeErrorModal())}>
             <div className={styles.flexSB}>
                 <h2>Error</h2>
             </div>
-            {/* <p className={styles.info}>{message}</p> */}
-            <p className={styles.info}>Sorry! Your account registration was not successful. Kindly try to register again.</p>
+            <p className={styles.info}>{message}</p>
+            {/* <p className={styles.info}>Sorry! Your account registration was not successful. Kindly try to register again.</p> */}
             <img src={error} className={styles.success} />
+        </ModalContainer>
+    )
+}
+
+
+export function ChangePasswordModal(props: any) {
+    const VIEW_NAME = "change_password"
+    const dispatch = useAppDispatch()
+    const [oldPassword, setOldPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
+    useEffect(() => {
+        if (newPassword !== confirmPassword) {
+            setError("Password does not match")
+        } else {
+            setError("")
+        }
+    }, [newPassword, confirmPassword])
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        setLoading(true)
+        dispatch(changePasswordAsync({old_password: oldPassword, new_password: newPassword}))
+    }
+
+    return (
+        <ModalContainer onClose={() => dispatch(closeModal(VIEW_NAME))}>
+            <div className={styles.flexSB}>
+                <h2>Change Password</h2>
+                {/* <TextButton text='Back' className={styles.underline} onClick={handleBack} /> */}
+            </div>
+            <p className={styles.info}>Kindly provide your old and new password and confirm it</p>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <InputField placeholder='Old Password' required={true} value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
+                <InputField placeholder='New Password' required={true} value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+                <InputField placeholder='Confirm New Password' required={true} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} error={error} />
+                <SubmitButton label='Change Password' loading={loading} className={styles.submit_button} />
+            </form>
         </ModalContainer>
     )
 }

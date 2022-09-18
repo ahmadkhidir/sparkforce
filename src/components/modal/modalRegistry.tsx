@@ -1,7 +1,7 @@
-import { ErrorModal, LoginModal, RegisterModal, SuccessModal, VerifyModal } from "./Modal";
+import { ChangePasswordModal, ErrorModal, LoginModal, RegisterModal, SuccessModal, VerifyModal } from "./Modal";
 
 export type ModalAction = (
-    'login' | 'register' | 'verify' | 'success' | 'error'
+    'login' | 'register' | 'verify' | 'success' | 'error' | 'change_password'
 )
 
 
@@ -25,5 +25,9 @@ export const Modal: {name: ModalAction, component: JSX.Element}[] = [
     {
         name: "error",
         component: <ErrorModal />
-    }
+    },
+    {
+        name: "change_password",
+        component: <ChangePasswordModal />
+    },
 ]

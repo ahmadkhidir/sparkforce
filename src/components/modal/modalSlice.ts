@@ -3,12 +3,14 @@ import { ModalAction } from "./modalRegistry";
 
 interface InitialState {
     current: ModalAction[],
-    message: string | null
+    message: string | null,
+    show_login: boolean,
 }
 
 const initialState: InitialState = {
     current: [],
-    message: null
+    message: null,
+    show_login: true
 }
 
 const modalSlice = createSlice({
@@ -33,8 +35,9 @@ const modalSlice = createSlice({
         closeAllModal: (state) => {
             state.current = []
         },
-        openSucessModal: (state, action: PayloadAction<string>) => {
-            state.message = action.payload
+        openSucessModal: (state, action: PayloadAction<[message: string, show_login?: boolean]>) => {
+            state.message = action.payload[0]
+            state.show_login = action.payload[1] !== undefined ? action.payload[1] : true
             state.current.push('success')
         },
         closeSucessModal: (state) => {
@@ -42,9 +45,19 @@ const modalSlice = createSlice({
             const i = state.current.indexOf("success")
             state.current.splice(i, 1)
         },
+        openErrorModal: (state, action: PayloadAction<[message: string, show_login?: boolean]>) => {
+            state.message = action.payload[0]
+            state.show_login = action.payload[1] !== undefined ? action.payload[1] : true
+            state.current.push('error')
+        },
+        closeErrorModal: (state) => {
+            state.message = null
+            const i = state.current.indexOf("error")
+            state.current.splice(i, 1)
+        },
     }
 })
 
 
-export const {openModal, closeModal, closeAllModal, openSucessModal, closeSucessModal} = modalSlice.actions
+export const { openModal, closeModal, closeAllModal, openSucessModal, closeSucessModal, openErrorModal, closeErrorModal } = modalSlice.actions
 export default modalSlice.reducer
