@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
-import { closeModal, openModal, openSucessModal } from "../components/modal/modalSlice";
-import { checkUserValidity, getOTP, login, register } from "./api";
+import { closeAllModal, closeModal, openErrorModal, openModal, openSucessModal } from "../components/modal/modalSlice";
+import { changePassword, checkUserValidity, getOTP, login, register } from "./api";
 
 
 interface InitialState {
@@ -78,13 +78,13 @@ export const registerAsync = createAsyncThunk(
         try {
             dispatch(updateRegLoading(true))
             const res = await register(form)
-            dispatch(openSucessModal('Your account has been created successfully. Kindly login with your credentials'))
+            dispatch(openSucessModal(['Your account has been created successfully. Kindly login with your credentials']))
             dispatch(authSlice.actions.clearRegistration())
             dispatch(closeModal('register'))
-            dispatch(openModal('success'))
+            // dispatch(openModal('success'))
         } catch (error) {
             dispatch(updateRegLoading(false))
-            dispatch(openModal('error'))
+            dispatch(openErrorModal(["Sorry! Your account registration was not successful. Kindly try to register again."]))
         }
     }
 )
@@ -113,6 +113,24 @@ export const populateAuthAsync = createAsyncThunk(
         const user_token = localStorage.getItem('user_token')
         const res = user_token && await checkUserValidity(user_token!)
         return res ? res.data.detail : false
+    }
+)
+
+export const changePasswordAsync = createAsyncThunk(
+    'auth/changePassword',
+    async (data: {old_password: string, new_password: string}, {dispatch}) => {
+        try {
+            const res = await changePassword(data.old_password, data.new_password)
+            if (res.data.detail === false) {
+                dispatch(openErrorModal([res.data.message, false]))
+            } else {
+                dispatch(closeAllModal())
+                dispatch(openSucessModal([res.data.message, false]))
+            }
+        } catch (error) {
+            dispatch(openErrorModal(["Enexpected error, please try again later", false]))
+        }
+        
     }
 )
 
@@ -183,7 +201,8 @@ const authSlice = createSlice({
             )
             .addMatcher(isAnyOf(
                 getOTPAsync.pending,
-                loginAsync.pending
+                loginAsync.pending,
+                changePasswordAsync.pending,
             ),
                 (state) => {
                     state.error_message = undefined
