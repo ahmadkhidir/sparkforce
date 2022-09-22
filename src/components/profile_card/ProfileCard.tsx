@@ -10,7 +10,7 @@ export function ProfileCard(props: any) {
     useEffect(() => {
       fetchUserInfo()
       .then(res=> {
-        console.log(res.data)
+        // console.log(res.data)
         setUser(res.data)})
     }, [])
     
