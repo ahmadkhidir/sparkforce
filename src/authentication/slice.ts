@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { closeAllModal, closeModal, openErrorModal, openModal, openSucessModal } from "../components/modal/modalSlice";
-import { changePassword, checkUserValidity, getOTP, login, register } from "./api";
+import { changePassword, checkUserValidity, forgotPassword, getOTP, login, register, verifyForgotPassword } from "./api";
 
 
 interface InitialState {
@@ -28,6 +28,10 @@ interface InitialState {
         channel: string | undefined,
     },
     regLoading: boolean,
+    forgotPasswordData: {
+        email?: string,
+        otp?: string,
+    }
 }
 
 const registrationUser = {
@@ -65,16 +69,19 @@ export const loginAsync = createAsyncThunk(
         } catch (error: any) {
             if (error.response.status === 401) { dispatch(authSlice.actions.updateErrorMessage(error.response.data.detail)) }
             if (error.response.status === 417) { dispatch(authSlice.actions.updateErrorMessage(error.response.data.detail)) }
+            setTimeout(() => {
+                dispatch(authSlice.actions.updateErrorMessage(undefined))
+            }, 1000)
         }
     }
 )
 
 export const registerAsync = createAsyncThunk(
     'auth/register',
-    async (_,{getState, dispatch}) => {
+    async (_, { getState, dispatch }) => {
         // @ts-ignore
         const _state = getState().auth
-        const form = {user: _state.registrationUser, ..._state.registrationDetails}
+        const form = { user: _state.registrationUser, ..._state.registrationDetails }
         try {
             dispatch(updateRegLoading(true))
             const res = await register(form)
@@ -102,6 +109,9 @@ export const getOTPAsync = createAsyncThunk(
         } catch (error: any) {
             if (error.response.status === 401) { dispatch(authSlice.actions.updateErrorMessage(error.response.data.detail)) }
             if (error.response.status === 503) { dispatch(authSlice.actions.updateErrorMessage(error.response.data.detail)) }
+            setTimeout(() => {
+                dispatch(authSlice.actions.updateErrorMessage(undefined))
+            }, 1000)
         }
 
     }
@@ -118,7 +128,7 @@ export const populateAuthAsync = createAsyncThunk(
 
 export const changePasswordAsync = createAsyncThunk(
     'auth/changePassword',
-    async (data: {old_password: string, new_password: string}, {dispatch}) => {
+    async (data: { old_password: string, new_password: string }, { dispatch }) => {
         try {
             const res = await changePassword(data.old_password, data.new_password)
             if (res.data.detail === false) {
@@ -130,7 +140,66 @@ export const changePasswordAsync = createAsyncThunk(
         } catch (error) {
             dispatch(openErrorModal(["Enexpected error, please try again later", false]))
         }
-        
+
+    }
+)
+
+export const verifyForgotPasswordAsync = createAsyncThunk(
+    'auth/verifyForgotPassword',
+    async (data: { email?: string, otp?: string }, { dispatch, getState }) => {
+        // @ts-ignore
+        let stored_data = getState().auth.forgotPasswordData;
+        dispatch(authSlice.actions.updateForgotPasswordData({ email: data.email || stored_data.email, otp: data.otp }))
+        try {
+            const res = await verifyForgotPassword(data.email || stored_data.email, data.otp)
+            if (res.data.detail === false) {
+                // dispatch(openErrorModal([res.data.message, false]))
+                dispatch(authSlice.actions.updateErrorMessage(res.data.message))
+                setTimeout(() => {
+                    dispatch(authSlice.actions.updateErrorMessage(undefined))
+                }, 1000)
+            } else {
+                dispatch(closeAllModal())
+                if (data.otp === undefined) {
+                    dispatch(openModal('verify_forgot_password'))
+                } else {
+                    dispatch(openModal('forgot_password'))
+                }
+                // dispatch(openSucessModal([res.data.message, true]))
+            }
+        } catch (error) {
+            // dispatch(openErrorModal(["Enexpected error, please try again later", false]))
+            dispatch(authSlice.actions.updateErrorMessage("Enexpected error, please try again later"))
+            setTimeout(() => {
+                dispatch(authSlice.actions.updateErrorMessage(undefined))
+            }, 1000)
+        }
+
+    }
+)
+
+export const forgotPasswordAsync = createAsyncThunk(
+    'auth/forgotPassword',
+    async (data: { password: string}, { dispatch, getState }) => {
+        // @ts-ignore
+        let stored_data = getState().auth.forgotPasswordData;
+        try {
+            const res = await forgotPassword(stored_data.email, data.password, stored_data.otp)
+            if (res.data.detail === false) {
+                // dispatch(openErrorModal([res.data.message, false]))
+                dispatch(authSlice.actions.updateErrorMessage(res.data.message))
+                setTimeout(() => {
+                    dispatch(authSlice.actions.updateErrorMessage(undefined))
+                }, 1000)
+            } else {
+                dispatch(closeAllModal())
+                dispatch(openSucessModal([res.data.message, true]))
+                dispatch(authSlice.actions.updateForgotPasswordData({email: undefined, otp: undefined}))
+            }
+        } catch (error) {
+            dispatch(openErrorModal(["Enexpected error, please try again later", false]))
+        }
+
     }
 )
 
@@ -141,7 +210,8 @@ const initialState: InitialState = {
     credentials: null,
     registrationUser: registrationUser,
     registrationDetails: registrationDetails,
-    regLoading: false
+    regLoading: false,
+    forgotPasswordData: {}
 }
 
 const authSlice = createSlice({
@@ -186,6 +256,10 @@ const authSlice = createSlice({
         clearRegistration: (state) => {
             state.registrationUser = registrationUser
             state.registrationDetails = registrationDetails
+        },
+        updateForgotPasswordData: (state, action) => {
+            state.forgotPasswordData.email = action.payload.email
+            state.forgotPasswordData.otp = action.payload.otp
         }
     },
     extraReducers: (builder) => {
@@ -203,6 +277,8 @@ const authSlice = createSlice({
                 getOTPAsync.pending,
                 loginAsync.pending,
                 changePasswordAsync.pending,
+                verifyForgotPasswordAsync.pending,
+                forgotPasswordAsync.pending,
             ),
                 (state) => {
                     state.error_message = undefined

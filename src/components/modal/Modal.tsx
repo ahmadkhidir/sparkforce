@@ -9,7 +9,7 @@ import error from './assets/error.svg'
 import { Button, SubmitButton, TextButton } from '../../atoms/buttons/Buttons'
 import { CheckBoxField, InputField, SelectField } from '../../atoms/fields/Fields'
 import { createContext, Fragment, useContext, useEffect, useReducer, useState } from 'react'
-import { changePasswordAsync, getOTPAsync, loginAsync, registerAsync, regStep1, regStep2, regStep3, updateRegLoading } from '../../authentication/slice'
+import { changePasswordAsync, forgotPasswordAsync, getOTPAsync, loginAsync, registerAsync, regStep1, regStep2, regStep3, updateRegLoading, verifyForgotPasswordAsync } from '../../authentication/slice'
 import { checkUserConflict, register } from '../../authentication/api'
 import { type } from '@testing-library/user-event/dist/types/setup/directApi'
 
@@ -72,7 +72,7 @@ export function LoginModal(props: any) {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <InputField placeholder='Email' required={true} value={email} onChange={e => setEmail(e.target.value)} error={error} />
                 <InputField placeholder='Password' required={true} type='password' value={password} onChange={e => setPassword(e.target.value)} />
-                <TextButton text='Forgot password?' className={styles.forget_paswd} />
+                <TextButton text='Forgot password?' className={styles.forget_paswd} onClick={() => dispatch(openModal('forgot_password_email'))} />
                 <SubmitButton loading={loading} className={styles.submit_button} />
             </form>
         </ModalContainer>
@@ -157,7 +157,7 @@ export function RegisterModal(props: any) {
             </div>
             <section className={styles.steps}>
                 {steps.map((item, i) => (
-                    <TextButton text={item.label} className={handleClassName(i)} onClick={() => setIndex(i)} />
+                    <TextButton key={i} text={item.label} className={handleClassName(i)} onClick={() => setIndex(i)} />
                 ))}
             </section>
             <section>
@@ -342,10 +342,123 @@ export function ChangePasswordModal(props: any) {
             </div>
             <p className={styles.info}>Kindly provide your old and new password and confirm it</p>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <InputField placeholder='Old Password' required={true} value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
-                <InputField placeholder='New Password' required={true} value={newPassword} onChange={e => setNewPassword(e.target.value)} />
-                <InputField placeholder='Confirm New Password' required={true} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} error={error} />
+                <InputField placeholder='Old Password' type={"password"} required={true} value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
+                <InputField placeholder='New Password' type={"password"} required={true} value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+                <InputField placeholder='Confirm New Password' type={"password"} required={true} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} error={error} />
                 <SubmitButton label='Change Password' loading={loading} className={styles.submit_button} />
+            </form>
+        </ModalContainer>
+    )
+}
+
+
+export function ForgotPasswordModal(props: any) {
+    const VIEW_NAME = "forgot_password"
+    const dispatch = useAppDispatch()
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
+    const error2 = useAppSelector(state => state.auth.error_message)
+    useEffect(() => {
+        if (error2) setLoading(false)
+    }, [error2])
+    useEffect(() => {
+        if (newPassword !== confirmPassword) {
+            setError("Password does not match")
+            setLoading(false)
+        } else {
+            setError("")
+        }
+    }, [newPassword, confirmPassword])
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        setLoading(true)
+        dispatch(forgotPasswordAsync({password: newPassword}))
+    }
+    const handleBack = () => {
+        dispatch(closeModal(VIEW_NAME))
+        dispatch(openModal('forgot_password_email'))
+    }
+
+    return (
+        <ModalContainer onClose={() => dispatch(closeModal(VIEW_NAME))}>
+            <div className={styles.flexSB}>
+                <h2>Change Password</h2>
+                <TextButton text='Back' className={styles.underline} onClick={handleBack} />
+            </div>
+            <p className={styles.info}>Kindly provide your new password and confirm it</p>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <InputField placeholder='New Password' type={"password"} required={true} value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+                <InputField placeholder='Confirm New Password' type={"password"} required={true} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} error={error || error2} />
+                <SubmitButton label='Change Password' loading={loading} className={styles.submit_button} />
+            </form>
+        </ModalContainer>
+    )
+}
+
+
+export function ForgotPasswordEmailModal(props: any) {
+    const VIEW_NAME = "forgot_password_email"
+    const dispatch = useAppDispatch()
+    const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(false)
+    const error = useAppSelector(state => state.auth.error_message)
+    useEffect(() => {
+        if (error) setLoading(false)
+    }, [error])
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        setLoading(true)
+        dispatch(verifyForgotPasswordAsync({email: email}))
+    }
+    const handleBack = () => {
+        dispatch(closeModal(VIEW_NAME))
+        dispatch(openModal('login'))
+    }
+
+    return (
+        <ModalContainer onClose={() => dispatch(closeModal(VIEW_NAME))}>
+            <div className={styles.flexSB}>
+                <h2>Forgot Password</h2>
+                <TextButton text='Back' className={styles.underline} onClick={handleBack} />
+            </div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <InputField placeholder='Email' type={"email"} required={true} value={email} onChange={e => setEmail(e.target.value)} error={error} />
+                <SubmitButton label='Confirm' loading={loading} className={styles.submit_button} />
+            </form>
+        </ModalContainer>
+    )
+}
+
+
+export function VerifyForgotPasswordModal(props: any) {
+    const dispatch = useAppDispatch()
+    const [otp, setOtp] = useState('')
+    const [loading, setLoading] = useState(false)
+    const error = useAppSelector(state => state.auth.error_message)
+    useEffect(() => {
+        if (error) setLoading(false)
+    }, [error])
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        setLoading(true)
+        dispatch(verifyForgotPasswordAsync({otp: otp}))
+    }
+    const handleBack = () => {
+        dispatch(closeModal('verify_forgot_password'))
+        dispatch(openModal('forgot_password_email'))
+    }
+    return (
+        <ModalContainer onClose={() => dispatch(closeModal('verify_forgot_password'))}>
+            <div className={styles.flexSB}>
+                <h2>Verify</h2>
+                <TextButton text='Back' className={styles.underline} onClick={handleBack} />
+            </div>
+            <p className={styles.info}>Kindly provide the Four (4) digit code sent to your email</p>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <InputField placeholder='OTP' required={true} value={otp} onChange={e => setOtp(e.target.value)} error={error} />
+                <SubmitButton label='Confirm' loading={loading} className={styles.submit_button} />
             </form>
         </ModalContainer>
     )

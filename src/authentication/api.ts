@@ -38,3 +38,18 @@ export async function changePassword(old_password: string, new_password: string)
         new_password: new_password,
     })
 }
+
+export async function verifyForgotPassword(email: string, otp?: string) {
+    return await client.POST('verify_forgot_password/', {
+        email: email,
+        otp: otp,
+    })
+}
+
+export async function forgotPassword(email: string, password: string, otp: string) {
+    return await client.POST('forgot_password/', {
+        email: email,
+        password: password,
+        otp: otp,
+    })
+}
