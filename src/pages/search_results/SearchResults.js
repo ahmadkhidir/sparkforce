@@ -49,7 +49,7 @@ export default function SearchResults() {
                 setItems(res.data.results)
                 setIsNext(res.data.next ? true : false)
                 setIsLoading(false)
-                console.log(res.data)
+                // console.log(res.data)
             })
     }, [search, datePostedGteFilter, datePostedLteFilter, costFilter])
 
