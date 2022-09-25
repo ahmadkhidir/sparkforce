@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './Buttons.module.scss'
-import { ButtonProps } from './utils'
+import { AnchorProps, ButtonProps } from './utils'
 import share_ic from './assets/share.svg'
 
 const c = classNames
@@ -10,6 +10,14 @@ export function Button(props: ButtonProps) {
 		<button {...props} className={c(styles.button, props.className)}
 		>{props.text}
 		</button>
+	)
+}
+
+export function AnchorButton(props: AnchorProps) {
+	return (
+		<a {...props} className={c(styles.button, props.className)}
+		>{props.text}
+		</a>
 	)
 }
 

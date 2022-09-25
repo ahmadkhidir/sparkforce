@@ -2,7 +2,7 @@ import styles from './SideNav.module.scss'
 import close_ic from './assets/close.svg'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { openModal } from '../modal/modalSlice'
-import { logout } from '../../authentication/slice'
+import { logoutAsync } from '../../authentication/slice'
 import { ProfileCard } from '../profile_card/ProfileCard'
 import { useNavigate } from 'react-router-dom'
 
@@ -56,7 +56,7 @@ export default function SideNav({ show, setShow }: SideNavProps) {
 				<NavButton>Wallet</NavButton>
 				<NavButton onClick={() => dispatch(openModal('change_password'))}>Change Password</NavButton>
 				<NavButton>Delete Account</NavButton>
-				<NavButton onClick={() => dispatch(logout())}>Logout</NavButton>
+				<NavButton onClick={() => dispatch(logoutAsync())}>Logout</NavButton>
 			</SideNavContainer>
 		)
 	}
