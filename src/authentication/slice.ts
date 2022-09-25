@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { closeAllModal, closeModal, openErrorModal, openModal, openSucessModal } from "../components/modal/modalSlice";
-import { changePassword, checkUserValidity, forgotPassword, getOTP, login, register, verifyForgotPassword } from "./api";
+import { changePassword, checkUserValidity, forgotPassword, getOTP, login, logout, register, verifyForgotPassword } from "./api";
 
 
 interface InitialState {
@@ -63,9 +63,13 @@ export const loginAsync = createAsyncThunk(
             if (res.status === 200) {
                 dispatch(closeModal('verify'))
             }
-            dispatch(authSlice.actions.updateAuthenticated({ auth: true, token: res.data.detail.token }))
-            dispatch(authSlice.actions.updateCredentials(null))
             localStorage.setItem('user_token', res.data.detail.token)
+            setTimeout(() => {
+                // Wait  for localStorage to set the user_token
+                dispatch(authSlice.actions.updateAuthenticated({ auth: true, token: res.data.detail.token }))
+                dispatch(authSlice.actions.updateCredentials(null))
+            }, 1000);
+
         } catch (error: any) {
             if (error.response.status === 401) { dispatch(authSlice.actions.updateErrorMessage(error.response.data.detail)) }
             if (error.response.status === 417) { dispatch(authSlice.actions.updateErrorMessage(error.response.data.detail)) }
@@ -85,14 +89,23 @@ export const registerAsync = createAsyncThunk(
         try {
             dispatch(updateRegLoading(true))
             const res = await register(form)
+            console.log(res)
             dispatch(openSucessModal(['Your account has been created successfully. Kindly login with your credentials']))
             dispatch(authSlice.actions.clearRegistration())
             dispatch(closeModal('register'))
             // dispatch(openModal('success'))
+            dispatch(updateRegLoading(false))
         } catch (error) {
             dispatch(updateRegLoading(false))
             dispatch(openErrorModal(["Sorry! Your account registration was not successful. Kindly try to register again."]))
         }
+    }
+)
+
+export const logoutAsync = createAsyncThunk(
+    'auth/logout',
+    async () => {
+        await logout()
     }
 )
 
@@ -180,7 +193,7 @@ export const verifyForgotPasswordAsync = createAsyncThunk(
 
 export const forgotPasswordAsync = createAsyncThunk(
     'auth/forgotPassword',
-    async (data: { password: string}, { dispatch, getState }) => {
+    async (data: { password: string }, { dispatch, getState }) => {
         // @ts-ignore
         let stored_data = getState().auth.forgotPasswordData;
         try {
@@ -194,7 +207,7 @@ export const forgotPasswordAsync = createAsyncThunk(
             } else {
                 dispatch(closeAllModal())
                 dispatch(openSucessModal([res.data.message, true]))
-                dispatch(authSlice.actions.updateForgotPasswordData({email: undefined, otp: undefined}))
+                dispatch(authSlice.actions.updateForgotPasswordData({ email: undefined, otp: undefined }))
             }
         } catch (error) {
             dispatch(openErrorModal(["Enexpected error, please try again later", false]))
@@ -227,11 +240,6 @@ const authSlice = createSlice({
         updateAuthenticated: (state, action) => {
             state.authenticated = action.payload.auth
             state.user_token = action.payload.token
-        },
-        logout: (state) => {
-            state.authenticated = false
-            state.user_token = null
-            localStorage.removeItem('user_token')
         },
         regStep1: (state, action) => {
             state.registrationUser.email = action.payload.email
@@ -273,6 +281,13 @@ const authSlice = createSlice({
                     else { localStorage.removeItem('user_token') }
                 }
             )
+            .addCase(logoutAsync.fulfilled,
+                (state) => {
+                    state.authenticated = false
+                    state.user_token = null
+                    localStorage.removeItem('user_token')
+                },
+            )
             .addMatcher(isAnyOf(
                 getOTPAsync.pending,
                 loginAsync.pending,
@@ -287,5 +302,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { logout, regStep1, regStep2, regStep3, updateRegLoading } = authSlice.actions
+export const { regStep1, regStep2, regStep3, updateRegLoading } = authSlice.actions
 export default authSlice.reducer

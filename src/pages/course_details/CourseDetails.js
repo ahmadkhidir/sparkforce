@@ -6,7 +6,7 @@ import { AppBarAfterLogin } from "../../components/app_bar/AppBar";
 import Footer from "../../components/footer/Footer";
 import { fetchCourseDetails } from "./courseDetailsApi";
 import styles from "./CourseDetails.module.scss"
-import { Button, ShareButton } from "../../atoms/buttons/Buttons";
+import { AnchorButton, Button, ShareButton } from "../../atoms/buttons/Buttons";
 import star from './assets/str.svg'
 import star_solid from './assets/str_s.svg'
 import time from './assets/time.svg'
@@ -42,7 +42,7 @@ export default function CourseDetails() {
                                     <p>{course.company} at {course.platform}</p>
                                 </div>
                                 <div className={styles.actions}>
-                                    <Button text="Register Now" className={styles.register_btn} />
+                                    <AnchorButton href={course.link} text="Register Now" className={styles.register_btn} />
                                     <ShareButton id={course.id} />
                                 </div>
                             </section>
@@ -81,19 +81,19 @@ export default function CourseDetails() {
                             <ReactMarkdown>{course.skills}</ReactMarkdown>
                         </div>
                     </section>
-                    <section className={styles.btn_container}>
-                        <Button text="Register Now" />
-                    </section>
-                    {/* <section className={styles.section}>
+                    
+                    <section className={styles.section}>
                         <h2>Author</h2>
-                        <div>
-                            <div><img src={course.icon} alt="" /></div>
+                        <div className={styles.author}>
+                            <div className={styles.avatar}><img src={course.icon} alt="" /></div>
                             <div>
                                 <h4>{course.author}</h4>
-                                <h4>Instructors</h4>
                             </div>
                         </div>
-                    </section> */}
+                    </section>
+                    <section className={styles.btn_container}>
+                        <AnchorButton href={course.link} text="Register Now" />
+                    </section>
                 </section>
                 : <section className={styles.loading}><div className={styles.roller}></div></section>
             }

@@ -16,6 +16,10 @@ export async function login(email: string, password: string, otp: string | numbe
     })
 }
 
+export async function logout() {
+    return await client.POST('logout/')
+}
+
 export async function register(data: any) {
     return await client.POST('register/', data)
 }
