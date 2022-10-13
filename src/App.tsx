@@ -8,7 +8,7 @@ import HomeAfterLogin from "./pages/home_after_login/HomeAfterLogin";
 import SearchResults from "./pages/search_results/SearchResults";
 import { Fragment, useEffect, useMemo } from "react";
 import CourseDetails from "./pages/course_details/CourseDetails";
-import E404 from "./pages/home/E404";
+import E404 from "./pages/e404/E404";
 // import WaitList from "./pages/waitlist/WaitList";
 
 function App() {

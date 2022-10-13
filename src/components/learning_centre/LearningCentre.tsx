@@ -7,14 +7,17 @@ import Image3 from './assets/image3.png'
 import Image4 from './assets/image4.png'
 import Image5 from './assets/image5.png'
 import Image6 from './assets/image6.png'
+import { useAppDispatch } from '../../app/hooks'
+import { openModal } from '../modal/modalSlice'
 
 export default function LearningCentre(props: any) {
+    const dispatch = useAppDispatch()
     return (
         <section className={styles.learning_centre}>
             <div className={styles.container}>
                 <h1>Learning Centre</h1>
                 <p>Develop your professional skills and get hired by talent seekers from different Sectors all over the world.</p>
-                <ArrowButton text='Explore Learning Contents' />
+                <ArrowButton text='Explore Learning Contents' onClick={() => dispatch(openModal('login'))} />
 
                 <div className={styles.grid}>
                     <ImageContentRowCard

@@ -27,7 +27,7 @@ export default function CourseDetails() {
                 <section className={styles.page}>
                     <header className={styles.header}>
                         <div>
-                            <URLStringify urls={["Home", "Learning Content", course.title, "Details"]} />
+                            <URLStringify urls={[["Home", "/"], ["Learning Content", "/search/"], [course.title, `/course-details/${course.id}/`], "Details"]} />
                             <h1>Details</h1>
                         </div>
                     </header>

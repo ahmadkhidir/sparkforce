@@ -95,7 +95,7 @@ export default function SearchResults() {
             </header>
             <section className={styles.filter_box}>
                 <div className={styles.wrapper}>
-                    <URLStringify urls={["Home", "Learning Content", `${search || 'All Data'}`]} />
+                    <URLStringify urls={[["Home", "/"], ["Learning Content", "/search/"], `${search || 'All Data'}`]} />
                     <ul className={styles.container}>
                         {/* <Dropdown
                             placeholder="Learning Content"
@@ -163,6 +163,7 @@ function getDate({ day = null, month = null, year = null }) {
 
 function Dropdown({ options, placeholder, onChange }) {
     return (
+        // remember to design custom dropdown later
         // <ul>
         //     <li>Learning Material</li>
         // </ul>

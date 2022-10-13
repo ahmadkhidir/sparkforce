@@ -64,10 +64,14 @@ export const loginAsync = createAsyncThunk(
                 dispatch(closeModal('verify'))
             }
             localStorage.setItem('user_token', res.data.detail.token)
-            setTimeout(() => {
+            const intv = setInterval(() => {
                 // Wait  for localStorage to set the user_token
-                dispatch(authSlice.actions.updateAuthenticated({ auth: true, token: res.data.detail.token }))
-                dispatch(authSlice.actions.updateCredentials(null))
+                const tkn = localStorage.getItem('user_token')
+                if (tkn) {
+                    dispatch(authSlice.actions.updateAuthenticated({ auth: true, token: res.data.detail.token }))
+                    dispatch(authSlice.actions.updateCredentials(null))
+                    clearInterval(intv)
+                }
             }, 1000);
 
         } catch (error: any) {
