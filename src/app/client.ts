@@ -16,7 +16,6 @@ const GET = async (url: string, params?: any) => {
     const token = localStorage.getItem('user_token')
     const headers = {
         'Authorization': token !== null ? `Token ${token}` : false,
-        "Access-Control-Allow-Origin" : "*"
     }
     return await _client.get(url, {
         params: params,
@@ -28,7 +27,6 @@ const POST = async (url: string, data?: any) => {
     const token = localStorage.getItem('user_token')
     const headers = {
         'Authorization': token != null ? `Token ${token}` : false,
-        "Access-Control-Allow-Origin" : "*"
     }
     return await _client.post(url, data, {headers: headers})
 }
@@ -37,7 +35,6 @@ const PUT = async (url: string, data?: any) => {
     const token = localStorage.getItem('user_token')
     const headers = {
         'Authorization': token != null ? `Token ${token}` : false,
-        "Access-Control-Allow-Origin" : "*"
     }
     return await _client.put(url, data, {headers: headers})
 }
@@ -46,7 +43,6 @@ const DELETE = async (url: string) => {
     const token = localStorage.getItem('user_token')
     const headers = {
         'Authorization': token != null ? `Token ${token}` : false,
-        "Access-Control-Allow-Origin" : "*"
     }
     return await _client.delete(url, {headers: headers})
 }
