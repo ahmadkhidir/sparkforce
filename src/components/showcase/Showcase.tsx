@@ -3,15 +3,18 @@ import styles from './Showcase.module.scss'
 import image1 from './assets/image1.png'
 import { List } from '../../atoms/lists/Lists'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../app/hooks'
+import { openModal } from '../modal/modalSlice'
 
 export default function Showcase(props: any) {
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
     return (
         <section className={styles.showcase}>
             <div className={styles.container}>
                 <div className={styles.content}>
                     <h1>Showcase Your Skills to Access Opportunities</h1>
-                    <ArrowButton text='Join Sparkforce' onClick={() => navigate('/waitlist')} />
+                    <ArrowButton text='Join Sparkforce' onClick={() => dispatch(openModal('register'))} />
                     <List
                         items={[
                             [
